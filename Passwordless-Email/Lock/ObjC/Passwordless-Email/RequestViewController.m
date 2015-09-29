@@ -59,12 +59,10 @@
     [self pingWithRequest:[NSURLRequest requestWithURL:app.nonSecurePingURL] callback:^(BOOL success) {
         if (success) {
             self.nonSecureAPIStatus.text = @"✔︎";
-            self.nonSecureAPIStatus.textColor = [UIColor whiteColor];
             self.nonSecureAPIStatus.backgroundColor = [UIColor greenColor];
             self.statusLabel.text = nil;
         } else {
             self.nonSecureAPIStatus.text = @"✖︎";
-            self.nonSecureAPIStatus.textColor = [UIColor whiteColor];
             self.nonSecureAPIStatus.backgroundColor = [UIColor redColor];
             self.statusLabel.text = @"Failed request to non secured API.\n Please check app's log";
         }

@@ -33,7 +33,8 @@
     self = [super init];
     if (self) {
         _lock = lock;
-        NSURL *baseURL = [NSURL URLWithString:@"http://localhost:3001"];
+        NSString *urlString = [[NSBundle mainBundle] infoDictionary][@"Auth0SampleURL"] ?: @"http://localhost:3001";
+        NSURL *baseURL = [NSURL URLWithString:urlString];
         _securePingURL = [NSURL URLWithString:@"/secured/ping" relativeToURL:baseURL];
         _nonSecurePingURL = [NSURL URLWithString:@"/ping" relativeToURL:baseURL];
     }

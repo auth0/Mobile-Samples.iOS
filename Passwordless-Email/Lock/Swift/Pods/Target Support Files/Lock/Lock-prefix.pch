@@ -1,0 +1,7 @@
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#endif
+
+#import "A0Logging.h"
+#define A0CurrentLockVersion @"1.19.0"
+#define A0LocalizedString(key) NSLocalizedStringFromTable(key, @"Lock", nil)
