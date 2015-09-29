@@ -1,0 +1,1 @@
+../../../Lock/Pod/Classes/Core/A0AuthParameters.h

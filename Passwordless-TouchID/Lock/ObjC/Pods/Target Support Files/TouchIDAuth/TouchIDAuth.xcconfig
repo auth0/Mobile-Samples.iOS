@@ -1,0 +1,1 @@
+TOUCHIDAUTH_OTHER_LDFLAGS = -framework "LocalAuthentication" -framework "Security"

@@ -1,0 +1,2 @@
+use_frameworks!
+pod 'Lock/TouchID', '~> 1.19'
