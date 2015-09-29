@@ -1,0 +1,2 @@
+use_frameworks!
+pod 'Lock/SMS', '~> 1.19'
