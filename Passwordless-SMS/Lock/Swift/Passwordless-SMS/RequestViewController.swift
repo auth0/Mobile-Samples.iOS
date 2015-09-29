@@ -38,7 +38,7 @@ class RequestViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let app = Application.sharedInstance
-        self.emailLabel.text = app.profile?.email
+        self.emailLabel.text = app.profile?.nickname
         self.tokenLabel.text = app.token?.idToken
 
         let session = NSURLSession.sharedSession()
