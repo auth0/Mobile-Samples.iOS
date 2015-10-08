@@ -43,9 +43,30 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func loginWithInstagram(sender: AnyObject) {
+        self.loginWithConnectionName("instagram")
+    }
+    
+    @IBAction func loginWithTouchID(sender: AnyObject) {
+        let lock = MyApplication.sharedInstance.lock
+        if let userId = self.userId {
+            self.touchID = TouchID(client: lock.apiClient(), userId: userId) { result -> () in
+                switch(result) {
+                case .Success(let profile, let token):
+                    self.showAlertWithTitle("Authenticated with Touch ID", message: "Authenticated user \(profile.nickname)")
+                    print("Authenticated user \(profile.name) id_token \(token.idToken)")
+                case .Error(let error):
+                    self.showAlertWithTitle("Failed to authenticate", message: "Failed to authenticate with Touch ID with error \(error.localizedDescription)");
+                    print("Failed to enroll Touch ID with error \(error)")
+                }
+            }
+            self.touchID.authenticate()
+        }
+    }
+
+    private func loginWithConnectionName(connection: String) {
         let lock = MyApplication.sharedInstance.lock
 
-        lock.identityProviderAuthenticator().authenticateWithConnectionName("instagram", parameters: nil,
+        lock.identityProviderAuthenticator().authenticateWithConnectionName(connection, parameters: nil,
             success: {[weak self] (profile, token) -> () in
                 let userClient = lock.newUserAPIClientWithIdToken(token.idToken)
                 self?.touchID = TouchID(client: lock.apiClient(), userClient: userClient, userId: profile.userId) { result -> () in
@@ -66,24 +87,7 @@ class LoginViewController: UIViewController {
             },
             failure: { (error) -> () in
                 print("Failed with error \(error)")
-            })
-    }
-    
-    @IBAction func loginWithTouchID(sender: AnyObject) {
-        let lock = MyApplication.sharedInstance.lock
-        if let userId = self.userId {
-            self.touchID = TouchID(client: lock.apiClient(), userId: userId) { result -> () in
-                switch(result) {
-                case .Success(let profile, let token):
-                    self.showAlertWithTitle("Authenticated with Touch ID", message: "Authenticated user \(profile.nickname)")
-                    print("Authenticated user \(profile.name) id_token \(token.idToken)")
-                case .Error(let error):
-                    self.showAlertWithTitle("Failed to authenticate", message: "Failed to authenticate with Touch ID with error \(error.localizedDescription)");
-                    print("Failed to enroll Touch ID with error \(error)")
-                }
-            }
-            self.touchID.authenticate()
-        }
+        })
     }
 
     private func showAlertWithTitle(title: String, message: String) {
