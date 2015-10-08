@@ -44,9 +44,9 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>Auth0ClientId</key>
-	<string>U5MhUrbyQHSVWjlEqZSTCBUFABLbJAS3</string>
+	<string>{CLIENT_ID}</string>
 	<key>Auth0Domain</key>
-	<string>overmind.auth0.com</string>
+	<string>{DOMAIN}</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSExceptionDomains</key>
