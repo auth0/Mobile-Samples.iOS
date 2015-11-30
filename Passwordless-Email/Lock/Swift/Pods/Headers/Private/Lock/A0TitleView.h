@@ -1,1 +1,1 @@
-../../../Lock/Pod/Classes/UI/Private/A0TitleView.h
+../../../Lock/Lock/UI/Private/A0TitleView.h

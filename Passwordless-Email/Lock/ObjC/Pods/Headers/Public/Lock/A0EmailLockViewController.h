@@ -1,1 +1,1 @@
-../../../Lock/Pod/Classes/Email/A0EmailLockViewController.h
+../../../Lock/Lock/Email/A0EmailLockViewController.h

@@ -1,1 +1,1 @@
-../../../Lock/Pod/Classes/UI/A0CredentialsValidator.h
+../../../Lock/Lock/CoreUI/A0CredentialsValidator.h

@@ -1,1 +1,1 @@
-../../../Lock/Pod/Classes/SMS/Private/A0SMSSendCodeViewController.h
+../../../Lock/Lock/SMS/Private/A0SMSSendCodeViewController.h

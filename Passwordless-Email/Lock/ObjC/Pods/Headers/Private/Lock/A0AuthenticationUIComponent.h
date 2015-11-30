@@ -1,1 +1,1 @@
-../../../Lock/Pod/Classes/UI/Private/A0AuthenticationUIComponent.h
+../../../Lock/Lock/UI/Private/A0AuthenticationUIComponent.h

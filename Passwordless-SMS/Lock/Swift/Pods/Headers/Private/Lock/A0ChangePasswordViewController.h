@@ -1,1 +1,1 @@
-../../../Lock/Pod/Classes/UI/Private/A0ChangePasswordViewController.h
+../../../Lock/Lock/UI/Private/A0ChangePasswordViewController.h

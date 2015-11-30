@@ -1,1 +1,1 @@
-../../../Lock/Pod/Classes/Core/A0Lock.h
+../../../Lock/Lock/Core/A0Lock.h

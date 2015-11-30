@@ -1,1 +1,1 @@
-../../../Lock/Pod/Classes/Core/A0Strategy.h
+../../../Lock/Lock/Core/A0Strategy.h

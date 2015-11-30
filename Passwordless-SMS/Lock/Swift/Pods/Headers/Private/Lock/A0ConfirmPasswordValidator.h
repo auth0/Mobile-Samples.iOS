@@ -1,1 +1,1 @@
-../../../Lock/Pod/Classes/UI/A0ConfirmPasswordValidator.h
+../../../Lock/Lock/UI/A0ConfirmPasswordValidator.h

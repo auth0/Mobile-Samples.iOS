@@ -1,1 +1,1 @@
-../../../Lock/Pod/Classes/Core/Private/A0Stats.h
+../../../Lock/Lock/Core/Private/A0Stats.h

@@ -1,1 +1,1 @@
-../../../Lock/Pod/Classes/CoreUI/A0Alert.h
+../../../Lock/Lock/CoreUI/A0Alert.h

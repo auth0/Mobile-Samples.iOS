@@ -1,1 +1,1 @@
-../../../Lock/Pod/Classes/UI/Private/A0ServiceCollectionViewCell.h
+../../../Lock/Lock/UI/Private/A0ServiceCollectionViewCell.h

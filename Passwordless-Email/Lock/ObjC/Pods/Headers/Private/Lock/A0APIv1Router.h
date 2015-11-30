@@ -1,1 +1,1 @@
-../../../Lock/Pod/Classes/Core/A0APIv1Router.h
+../../../Lock/Lock/Core/A0APIv1Router.h

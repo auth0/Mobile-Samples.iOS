@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		595DD37BFE280AB18B075BEF /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED0CB92088CF0C3F1E503C4 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		595DD37BFE280AB18B075BEF /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED0CB92088CF0C3F1E503C4 /* Pods.framework */; };
 		5F8748011BBAF84200FD4836 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8748001BBAF84200FD4836 /* AppDelegate.swift */; };
 		5F8748061BBAF84200FD4836 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F8748041BBAF84200FD4836 /* Main.storyboard */; };
 		5F8748081BBAF84200FD4836 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F8748071BBAF84200FD4836 /* Assets.xcassets */; };
 		5F87480B1BBAF84200FD4836 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F8748091BBAF84200FD4836 /* LaunchScreen.storyboard */; };
-		5F8748131BBAF90D00FD4836 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8748121BBAF90D00FD4836 /* WelcomeViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		5F8748151BBAF91600FD4836 /* RequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8748141BBAF91600FD4836 /* RequestViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		5F8748171BBAFB7A00FD4836 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8748161BBAFB7A00FD4836 /* Application.swift */; settings = {ASSET_TAGS = (); }; };
+		5F8748131BBAF90D00FD4836 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8748121BBAF90D00FD4836 /* WelcomeViewController.swift */; };
+		5F8748151BBAF91600FD4836 /* RequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8748141BBAF91600FD4836 /* RequestViewController.swift */; };
+		5F8748171BBAFB7A00FD4836 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8748161BBAFB7A00FD4836 /* Application.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */

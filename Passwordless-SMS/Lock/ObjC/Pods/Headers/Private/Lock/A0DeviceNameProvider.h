@@ -1,1 +1,1 @@
-../../../Lock/Pod/Classes/Core/iOS/A0DeviceNameProvider.h
+../../../Lock/Lock/Core/iOS/A0DeviceNameProvider.h

@@ -1,1 +1,1 @@
-../../../Lock/Pod/Classes/Core/Private/NSObject+A0APIClientProvider.h
+../../../Lock/Lock/Core/Private/NSObject+A0APIClientProvider.h

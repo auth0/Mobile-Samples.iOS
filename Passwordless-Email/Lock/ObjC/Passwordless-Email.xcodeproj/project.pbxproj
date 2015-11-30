@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5FB6C3021BB9DC9B00B20CA6 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6C3011BB9DC9B00B20CA6 /* WelcomeViewController.m */; settings = {ASSET_TAGS = (); }; };
-		5FB6C3051BB9DD6C00B20CA6 /* Application.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6C3041BB9DD6C00B20CA6 /* Application.m */; settings = {ASSET_TAGS = (); }; };
-		5FB6C3081BB9E19100B20CA6 /* RequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6C3071BB9E19100B20CA6 /* RequestViewController.m */; settings = {ASSET_TAGS = (); }; };
+		5FB6C3021BB9DC9B00B20CA6 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6C3011BB9DC9B00B20CA6 /* WelcomeViewController.m */; };
+		5FB6C3051BB9DD6C00B20CA6 /* Application.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6C3041BB9DD6C00B20CA6 /* Application.m */; };
+		5FB6C3081BB9E19100B20CA6 /* RequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FB6C3071BB9E19100B20CA6 /* RequestViewController.m */; };
 		5FD443B21BB9AD60009152CF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FD443B11BB9AD60009152CF /* main.m */; };
 		5FD443B51BB9AD60009152CF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FD443B41BB9AD60009152CF /* AppDelegate.m */; };
 		5FD443BB1BB9AD60009152CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FD443B91BB9AD60009152CF /* Main.storyboard */; };
@@ -125,6 +125,7 @@
 				5FD443AA1BB9AD60009152CF /* Frameworks */,
 				5FD443AB1BB9AD60009152CF /* Resources */,
 				C3918C6749ED795096B9C786 /* Copy Pods Resources */,
+				84AF2AB96CC5BD4434755B57 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -194,6 +195,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		84AF2AB96CC5BD4434755B57 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C3918C6749ED795096B9C786 /* Copy Pods Resources */ = {

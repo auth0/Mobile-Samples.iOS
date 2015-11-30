@@ -1,1 +1,1 @@
-../../../Lock/Pod/Classes/UI/A0LockViewController.h
+../../../Lock/Lock/UI/A0LockViewController.h
