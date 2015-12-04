@@ -1,1 +1,1 @@
-../../../Lock/Pod/Classes/Core/Private/NSError+A0APIError.h
+../../../Lock/Lock/Core/Private/NSError+A0APIError.h

@@ -1,1 +1,1 @@
-../../../Lock/Pod/Classes/Core/A0APIClientProvider.h
+../../../Lock/Lock/Core/A0APIClientProvider.h

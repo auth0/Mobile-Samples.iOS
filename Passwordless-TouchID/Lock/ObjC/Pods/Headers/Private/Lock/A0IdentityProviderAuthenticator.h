@@ -1,1 +1,1 @@
-../../../Lock/Pod/Classes/Provider/A0IdentityProviderAuthenticator.h
+../../../Lock/Lock/Provider/A0IdentityProviderAuthenticator.h

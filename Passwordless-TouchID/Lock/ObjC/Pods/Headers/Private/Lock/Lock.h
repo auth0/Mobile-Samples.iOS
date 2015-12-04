@@ -1,1 +1,1 @@
-../../../Lock/Pod/Classes/Lock.h
+../../../Lock/CocoaPods/Lock.h

@@ -1,1 +1,1 @@
-../../../Lock/Pod/Classes/UI/Private/A0DatabaseLoginViewController.h
+../../../Lock/Lock/UI/Private/A0DatabaseLoginViewController.h

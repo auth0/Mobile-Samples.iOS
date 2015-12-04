@@ -1,1 +1,1 @@
-../../../Lock/Pod/Classes/Core/A0UserIdentity.h
+../../../Lock/Lock/Core/A0UserIdentity.h

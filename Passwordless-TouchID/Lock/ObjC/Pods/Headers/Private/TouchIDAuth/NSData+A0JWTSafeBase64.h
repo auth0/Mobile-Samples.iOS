@@ -1,1 +1,1 @@
-../../../TouchIDAuth/Pod/Classes/NSData+A0JWTSafeBase64.h
+../../../TouchIDAuth/TouchIDAuth/NSData+A0JWTSafeBase64.h
