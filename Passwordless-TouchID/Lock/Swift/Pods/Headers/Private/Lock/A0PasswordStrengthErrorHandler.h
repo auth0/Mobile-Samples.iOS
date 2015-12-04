@@ -1,1 +1,1 @@
-../../../Lock/Pod/Classes/Core/A0PasswordStrengthErrorHandler.h
+../../../Lock/Lock/Core/A0PasswordStrengthErrorHandler.h

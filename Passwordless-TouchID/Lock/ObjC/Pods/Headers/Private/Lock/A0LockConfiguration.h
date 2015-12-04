@@ -1,1 +1,1 @@
-../../../Lock/Pod/Classes/UI/A0LockConfiguration.h
+../../../Lock/Lock/UI/A0LockConfiguration.h

@@ -1,1 +1,1 @@
-../../../Lock/Pod/Classes/UI/Private/A0FullLoginViewController.h
+../../../Lock/Lock/UI/Private/A0FullLoginViewController.h

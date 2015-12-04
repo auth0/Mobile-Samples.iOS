@@ -1,1 +1,1 @@
-../../../TouchIDAuth/Pod/Classes/A0RSAKeyExporter.h
+../../../TouchIDAuth/TouchIDAuth/A0RSAKeyExporter.h

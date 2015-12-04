@@ -1,1 +1,1 @@
-../../../Lock/Pod/Classes/TouchID/Private/A0TouchIDSignUpViewController.h
+../../../Lock/Lock/TouchID/Private/A0TouchIDSignUpViewController.h

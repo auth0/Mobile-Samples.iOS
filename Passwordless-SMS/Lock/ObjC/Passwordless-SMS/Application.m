@@ -25,14 +25,8 @@
 @implementation Application
 
 - (instancetype)init {
-    [super doesNotRecognizeSelector:_cmd];
-    return nil;
-}
-
-- (instancetype)initWithLock:(A0Lock *)lock {
     self = [super init];
     if (self) {
-        _lock = lock;
         NSString *urlString = [[NSBundle mainBundle] infoDictionary][@"Auth0SampleURL"] ?: @"http://localhost:3001";
         NSURL *baseURL = [NSURL URLWithString:urlString];
         _securePingURL = [NSURL URLWithString:@"/secured/ping" relativeToURL:baseURL];
@@ -45,7 +39,7 @@
     static Application *instance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        instance = [[Application alloc] initWithLock:[A0Lock newLock]];
+        instance = [[Application alloc] init];
     });
     return instance;
 }

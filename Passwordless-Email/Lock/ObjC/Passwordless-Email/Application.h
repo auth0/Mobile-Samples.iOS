@@ -25,7 +25,6 @@
 #import <Lock/Lock.h>
 
 @interface Application : NSObject
-@property (readonly, strong, nonatomic) A0Lock *lock;
 @property (strong, nonatomic) A0UserProfile *profile;
 @property (strong, nonatomic) A0Token* token;
 @property (readonly, strong, nonatomic) NSURL *securePingURL;

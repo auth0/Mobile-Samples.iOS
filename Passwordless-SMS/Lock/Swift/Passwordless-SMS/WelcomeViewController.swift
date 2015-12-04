@@ -26,7 +26,7 @@ import Lock
 class WelcomeViewController: UIViewController {
 
     @IBAction func tryLock(sender: AnyObject) {
-        let lock = Application.sharedInstance.lock
+        let lock = A0Lock.sharedLock()
         let controller = lock.newSMSViewController()
         controller.onAuthenticationBlock = { (profile, token) in
             let app = Application.sharedInstance

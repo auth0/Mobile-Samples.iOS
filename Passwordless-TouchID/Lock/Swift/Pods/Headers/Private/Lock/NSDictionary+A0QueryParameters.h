@@ -1,1 +1,1 @@
-../../../Lock/Pod/Classes/Core/Private/NSDictionary+A0QueryParameters.h
+../../../Lock/Lock/Core/Private/NSDictionary+A0QueryParameters.h
