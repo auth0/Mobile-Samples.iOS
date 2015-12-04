@@ -27,7 +27,6 @@ class Application {
 
     static var sharedInstance = Application()
 
-    var lock = A0Lock()
     var profile: A0UserProfile?
     var token: A0Token?
     var nonSecurePingURL: NSURL

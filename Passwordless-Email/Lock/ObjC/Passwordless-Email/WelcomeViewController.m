@@ -32,7 +32,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.lock = [[Application sharedInstance] lock];
+    self.lock = [A0Lock sharedLock];
 }
 
 - (IBAction)tryLock:(id)sender {
