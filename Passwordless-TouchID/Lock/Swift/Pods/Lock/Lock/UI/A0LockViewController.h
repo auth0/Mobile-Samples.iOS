@@ -109,6 +109,11 @@ NS_ASSUME_NONNULL_BEGIN
 ///------------------------------------------------
 
 /**
+ *  Default value for identifier field (if available). Default is nil
+ */
+@property (copy, nullable, nonatomic) NSString *defaultIdentifier;
+
+/**
  After a successful Signup, `A0AuthenticationViewController` will attempt to login the user if this property is YES otherwise will call onAuthenticationBlock with both parameters nil. Default value is YES
  */
 @property (assign, nonatomic) BOOL loginAfterSignUp;
@@ -130,6 +135,12 @@ NS_ASSUME_NONNULL_BEGIN
  *  @see A0AuthParameters
  */
 @property (copy, nullable, nonatomic) A0AuthParameters *authenticationParameters;
+
+/**
+ *  List of enterprise connection names that should always use web form to login.
+ *  By default all ADFS, AD & WAAD connections will use native form to login unless added to this array.
+ */
+@property (copy, nullable, nonatomic) NSArray<NSString *> *enterpriseConnectionsUsingWebForm;
 
 ///------------------------------------------------
 /// @name Connection filtering

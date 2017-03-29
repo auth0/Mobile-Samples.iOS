@@ -1,59 +1,45 @@
 PODS:
-  - AFNetworking (2.6.3):
-    - AFNetworking/NSURLConnection (= 2.6.3)
-    - AFNetworking/NSURLSession (= 2.6.3)
-    - AFNetworking/Reachability (= 2.6.3)
-    - AFNetworking/Security (= 2.6.3)
-    - AFNetworking/Serialization (= 2.6.3)
-    - AFNetworking/UIKit (= 2.6.3)
-  - AFNetworking/NSURLConnection (2.6.3):
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.6.3):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.6.3)
-  - AFNetworking/Security (2.6.3)
-  - AFNetworking/Serialization (2.6.3)
-  - AFNetworking/UIKit (2.6.3):
-    - AFNetworking/NSURLConnection
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - CocoaLumberjack (2.2.0):
-    - CocoaLumberjack/Default (= 2.2.0)
-    - CocoaLumberjack/Extensions (= 2.2.0)
-  - CocoaLumberjack/Core (2.2.0)
-  - CocoaLumberjack/Default (2.2.0):
-    - CocoaLumberjack/Core
-  - CocoaLumberjack/Extensions (2.2.0):
-    - CocoaLumberjack/Default
-  - Lock/Core (1.21.0):
-    - AFNetworking (~> 2.5)
-    - CocoaLumberjack (~> 2.0)
-  - Lock/CoreUI (1.21.0):
-    - CocoaLumberjack (~> 2.0)
+  - Lock/Core (1.28.2):
+    - AFNetworking (~> 3.0)
+  - Lock/CoreUI (1.28.2):
     - Lock/Core
-  - Lock/TouchID (1.21.0):
-    - CocoaLumberjack (~> 2.0)
+    - Masonry (~> 0.6)
+  - Lock/TouchID (1.28.2):
     - Lock/UI
     - SimpleKeychain (~> 0.2)
     - TouchIDAuth (~> 0.1)
-  - Lock/UI (1.21.0):
-    - CocoaLumberjack (~> 2.0)
+  - Lock/UI (1.28.2):
     - Lock/CoreUI
-  - SimpleKeychain (0.6.1)
+  - Masonry (0.6.4)
+  - SimpleKeychain (0.7.0)
   - TouchIDAuth (0.2.0):
     - SimpleKeychain (~> 0.3)
 
 DEPENDENCIES:
-  - Lock/TouchID (~> 1.19)
+  - Lock/TouchID (~> 1.28)
 
 SPEC CHECKSUMS:
-  AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
-  CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
-  Lock: cf46cea61023248b458662a9800a99c410a355f4
-  SimpleKeychain: 150d76f3b9200de58f033228f6e976c6241a221c
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  Lock: 742c21d94c8a1805a3fb8d7e8a5d5e873b14ec47
+  Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
+  SimpleKeychain: b50cef3b87939d480ea1143425c00f5b4b70fe21
   TouchIDAuth: 0cf861f58a2cacfc1c12cb02de4850729d943c81
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: cc1a5fe7696176ef5d6ad8e8d881de8f3da112a2
+
+COCOAPODS: 1.2.0

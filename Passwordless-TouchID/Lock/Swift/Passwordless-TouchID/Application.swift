@@ -33,9 +33,9 @@ class Application {
     var securePingURL: NSURL
 
     private init() {
-        let urlString = NSBundle.mainBundle().infoDictionary?["Auth0SampleURL"] as? String ?? "http://localhost:3001"
+        let urlString = Bundle.main.infoDictionary?["Auth0SampleURL"] as? String ?? "http://localhost:3001"
         let baseURL = NSURL(string: urlString)
-        self.nonSecurePingURL = NSURL(string: "/ping", relativeToURL: baseURL)!
-        self.securePingURL = NSURL(string: "/secured/ping", relativeToURL: baseURL)!
+        self.nonSecurePingURL = NSURL(string: "/ping", relativeTo: baseURL as URL?)!
+        self.securePingURL = NSURL(string: "/secured/ping", relativeTo: baseURL as URL?)!
     }
 }

@@ -31,6 +31,10 @@
 #import "A0MainBundleCredentialProvider.h"
 #import "A0FileCredentialProvider.h"
 #import "Constants.h"
+#import "A0Telemetry.h"
+
+NSString * const A0ClientInfoHeaderName = @"Auth0-Client";
+NSString * const A0ClientInfoQueryParamName = @"auth0Client";
 
 static NSString * const Auth0FileName = @"Auth0";
 static NSString * const Auth0FileExtension = @"plist";
@@ -51,10 +55,19 @@ static NSString * const Auth0FileExtension = @"plist";
 @end
 
 static NSURL *Auth0CDNRegionURLFromDomainURL(NSURL *domainURL) {
-    if ([domainURL.host hasSuffix:@".eu.auth0.com"]) {
-        return [NSURL URLWithString:@"https://cdn.eu.auth0.com"];
+    NSString *cdn = @"cdn";
+
+    if ([domainURL.host hasSuffix:@".auth0.com"]) {
+        NSString *part = [[domainURL.host componentsSeparatedByString:@".auth0.com"] firstObject];
+        NSArray<NSString *> *values = [part componentsSeparatedByString:@"."];
+        if (values.count > 1 && values.lastObject.length > 0) {
+            cdn = [[cdn stringByAppendingString:@"."] stringByAppendingString:values.lastObject];
+        }
     }
-    return [NSURL URLWithString:@"https://cdn.auth0.com"];
+    NSURLComponents *components = [[NSURLComponents alloc] init];
+    components.scheme = @"https";
+    components.host = [cdn stringByAppendingString:@".auth0.com"];
+    return components.URL;
 }
 
 @interface A0Lock ()
@@ -68,8 +81,6 @@ static NSURL *Auth0CDNRegionURLFromDomainURL(NSURL *domainURL) {
 @end
 
 @implementation A0Lock
-
-AUTH0_DYNAMIC_LOGGER_METHODS
 
 - (instancetype)init {
     NSString *path = [[NSBundle mainBundle] pathForResource:Auth0FileName ofType:Auth0FileExtension];
@@ -118,8 +129,10 @@ AUTH0_DYNAMIC_LOGGER_METHODS
 #if TARGET_OS_IPHONE
         _authenticator = [[A0IdentityProviderAuthenticator alloc] initWithLock:self];
 #endif
+        _telemetry = [A0Telemetry telemetryEnabled] ? [[A0Telemetry alloc] init] : nil;
+        _client.telemetryInfo = _telemetry.base64Value;
+        _usePKCE = NO;
     }
-
     return self;
 }
 
@@ -130,6 +143,13 @@ AUTH0_DYNAMIC_LOGGER_METHODS
         SharedInstance = [A0Lock newLock];
     });
     return SharedInstance;
+}
+
+- (void)setTelemetry:(A0Telemetry *)telemetry {
+    [self willChangeValueForKey:NSStringFromSelector(@selector(telemetry))];
+    _telemetry = telemetry;
+    [self didChangeValueForKey:NSStringFromSelector(@selector(telemetry))];
+    self.client.telemetryInfo = telemetry.base64Value;
 }
 
 - (A0APIClient *)apiClient {

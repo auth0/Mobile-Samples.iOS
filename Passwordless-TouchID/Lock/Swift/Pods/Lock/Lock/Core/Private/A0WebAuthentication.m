@@ -27,10 +27,10 @@
 #import "A0Errors.h"
 #import "NSDictionary+A0QueryParameters.h"
 #import "A0Connection.h"
-#import "A0Stats.h"
 #import "A0AuthParameters.h"
 #import "NSError+A0APIError.h"
 #import "Constants.h"
+#import "A0Lock.h"
 
 #define kCallbackURLString @"a0%@://%@.auth0.com/authorize"
 
@@ -42,8 +42,6 @@
 @end
 
 @implementation A0WebAuthentication
-
-AUTH0_DYNAMIC_LOGGER_METHODS
 
 - (instancetype)initWithClientId:(NSString *)clientId domainURL:(NSURL *)domainURL connectionName:(NSString *)connectionName {
     self = [super init];
@@ -94,18 +92,40 @@ AUTH0_DYNAMIC_LOGGER_METHODS
     return token;
 }
 
-- (NSURL *)authorizeURLWithParameters:(NSDictionary *)parameters {
+- (NSString *)authorizationCodeFromURL:(NSURL *)url error:(NSError * _Nullable __autoreleasing *)error {
+    NSString *queryString = url.query ?: url.fragment;
+    NSDictionary *params = [NSDictionary fromQueryString:queryString];
+    A0LogDebug(@"Received params %@ from URL %@", params, url);
+    NSString *errorMessage = params[@"error"];
+    NSString *code;
+    if (errorMessage) {
+        A0LogError(@"URL contained error message %@", errorMessage);
+        if (error != NULL) {
+            NSString *localizedDescription = [NSString stringWithFormat:@"Failed to authenticate user with connection %@", self.connectionName];
+            *error = [NSError errorWithCode:A0ErrorCodeAuthenticationFailed
+                                description:A0LocalizedString(localizedDescription)
+                                    payload:params];
+        }
+    } else {
+        code = params[@"code"];
+    }
+    return code;
+}
+
+- (NSURL *)authorizeURLWithParameters:(NSDictionary *)parameters usePKCE:(BOOL)usePKCE {
+    NSString *responseType = usePKCE ? @"code" : @"token";
+    A0LogVerbose(@"Using response_type %@", responseType);
     NSURLComponents *components = [[NSURLComponents alloc] initWithURL:self.domainURL.absoluteURL resolvingAgainstBaseURL:NO];
     components.path = @"/authorize";
     NSMutableDictionary *dictionary = parameters ? [parameters mutableCopy] : [[[A0AuthParameters newDefaultParams] asAPIPayload] mutableCopy];
     [dictionary addEntriesFromDictionary:@{
-                                           @"response_type": @"token",
+                                           @"response_type": responseType,
                                            @"client_id": self.clientId,
                                            @"redirect_uri": self.callbackURL.absoluteString,
                                            @"connection": self.connectionName,
                                            }];
-    if ([A0Stats shouldSendAuth0ClientHeader]) {
-        dictionary[A0ClientInfoQueryParamName] = [A0Stats stringForAuth0ClientHeader];
+    if (self.telemetryInfo) {
+        dictionary[A0ClientInfoQueryParamName] = self.telemetryInfo;
     }
     components.query = dictionary.queryString;
     return components.URL;
