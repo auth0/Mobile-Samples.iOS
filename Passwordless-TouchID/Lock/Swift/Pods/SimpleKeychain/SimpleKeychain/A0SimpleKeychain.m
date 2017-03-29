@@ -240,7 +240,7 @@
             accessibility = kSecAttrAccessibleWhenUnlockedThisDeviceOnly;
             break;
         default:
-            accessibility = kSecAttrAccessibleAfterFirstUnlock;
+            accessibility = kSecAttrAccessibleWhenUnlockedThisDeviceOnly;
     }
     return accessibility;
 }
@@ -356,12 +356,10 @@
                                       (__bridge id)kSecAttrAccount: key,
                                       }];
 #if TARGET_OS_IPHONE
-    if (self.useAccessControl && floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1) {
-        if (message) {
+    if (self.useAccessControl) {
+        if (message && floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1) {
             query[(__bridge id)kSecUseOperationPrompt] = message;
         }
-    } else {
-        NSLog(@"Error trying to access to non available kSecUseOperationPrompt in iOS7");
     }
 #endif
 

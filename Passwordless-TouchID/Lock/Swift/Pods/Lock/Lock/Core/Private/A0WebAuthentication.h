@@ -22,7 +22,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class A0Token, A0Application, A0Strategy;
+@class A0Token, A0Application, A0Strategy, A0Lock;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -36,6 +36,11 @@ NS_ASSUME_NONNULL_BEGIN
  *  Callback URL for web authentication using either Safari or embedded UIWebView.
  */
 @property (readonly, nonatomic) NSURL *callbackURL;
+
+/**
+ *  Telemetry info sent with the login request to Auth0
+ */
+@property (nullable, copy, nonatomic) NSString *telemetryInfo;
 
 /**
  *  Initialise an instance with Auth0's clientId and specific strategy (e.g. linkedin).
@@ -68,13 +73,23 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable A0Token *)tokenFromURL:(NSURL *)url error:(NSError **)error;
 
 /**
+ *  Returns an authorization code from an URL query parameters
+ *
+ *  @param url   where the code is obtained
+ *  @param error if the parsing fails or the URL contains an error message
+ *
+ *  @return an instance of `A0Token` with the token information or nil if an error eccurs.
+ */
+- (nullable NSString *)authorizationCodeFromURL:(NSURL *)url error:(NSError **)error;
+
+/**
  *  Authorize endpoint URL with parameters
  *
  *  @param parameters to be sent to authorize endpoint
  *
  *  @return authorize URL
  */
-- (nullable NSURL *)authorizeURLWithParameters:(nullable NSDictionary *)parameters;
+- (nullable NSURL *)authorizeURLWithParameters:(nullable NSDictionary *)parameters usePKCE:(BOOL)usePKCE;
 
 @end
 

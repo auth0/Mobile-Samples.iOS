@@ -30,7 +30,34 @@
 
 @implementation A0ProgressButton
 
-- (void)awakeFromNib {
+- (void)setInProgress:(BOOL)inProgress {
+    if (inProgress) {
+        self.enabled = NO;
+        self.activityIndicator.hidden = NO;
+        [self.activityIndicator startAnimating];
+    } else {
+        self.enabled = YES;
+        self.activityIndicator.hidden = YES;
+        [self.activityIndicator stopAnimating];
+    }
+}
+
+#pragma mark - Factory Methods
+
++ (instancetype)progressButton {
+    return [self progressButtonWithFrame:CGRectZero];
+}
+
++ (instancetype)progressButtonWithFrame:(CGRect)frame {
+    A0ProgressButton *button = [A0ProgressButton buttonWithType:UIButtonTypeCustom];
+    button.frame = frame;
+    [button setupLayout];
+    [button setTitle:@" " forState:UIControlStateDisabled];
+    return button;
+}
+
+#pragma mark - Layout
+- (void)setupLayout {
     UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     activityIndicator.hidesWhenStopped = YES;
     activityIndicator.hidden = YES;
@@ -44,25 +71,12 @@
                                                     multiplier:1.0f
                                                       constant:0.0f]];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:self
-                                                              attribute:NSLayoutAttributeCenterY
-                                                              relatedBy:NSLayoutRelationEqual
-                                                                 toItem:activityIndicator
-                                                              attribute:NSLayoutAttributeCenterY
-                                                             multiplier:1.0f
-                                                               constant:0.0f]];
+                                                     attribute:NSLayoutAttributeCenterY
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:activityIndicator
+                                                     attribute:NSLayoutAttributeCenterY
+                                                    multiplier:1.0f
+                                                      constant:0.0f]];
     self.activityIndicator = activityIndicator;
 }
-
-- (void)setInProgress:(BOOL)inProgress {
-    if (inProgress) {
-        self.enabled = NO;
-        self.activityIndicator.hidden = NO;
-        [self.activityIndicator startAnimating];
-    } else {
-        self.enabled = YES;
-        self.activityIndicator.hidden = YES;
-        [self.activityIndicator stopAnimating];
-    }
-}
-
 @end

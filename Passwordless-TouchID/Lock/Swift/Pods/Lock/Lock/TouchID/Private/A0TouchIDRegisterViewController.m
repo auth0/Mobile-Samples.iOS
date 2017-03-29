@@ -27,25 +27,32 @@
 #import "A0KeyboardHandler.h"
 #import "A0TouchIDSignUpViewController.h"
 #import "A0DatabaseLoginViewController.h"
-
+#import "A0MFACodeViewController.h"
 #import "A0ChangePasswordViewController.h"
 #import "A0AuthParameters.h"
 #import "A0NavigationView.h"
 #import "A0TitleView.h"
 #import "Constants.h"
+#import "A0KeyUploader.h"
+#import "A0Lock.h"
+#import "A0Token.h"
+#import "A0UserProfile.h"
+#import "A0LoginView.h"
 
 @interface A0TouchIDRegisterViewController ()
 @end
 
 @implementation A0TouchIDRegisterViewController
 
-- (instancetype)init {
-    return [self initWithNibName:NSStringFromClass(A0TouchIDRegisterViewController.class) bundle:[NSBundle bundleForClass:A0TouchIDRegisterViewController.class]];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self displayController:[self buildSignUp]];
+    
+    if(_disableSignUp) {
+        [self displayController:[self buildLogin]];
+    } else {
+        [self displayController:[self buildSignUp]];
+    }
+    
     A0Theme *theme = [A0Theme sharedInstance];
     UIImage *image = [theme imageForKey:A0ThemeScreenBackgroundImageName];
     if (image) {
@@ -66,7 +73,7 @@
     [self.navigationView addButtonWithLocalizedTitle:A0LocalizedString(@"CANCEL") actionBlock:self.onCancelBlock];
     [self.navigationView addButtonWithLocalizedTitle:A0LocalizedString(@"ALREADY HAVE AN ACCOUNT?") actionBlock:^{
         A0DatabaseLoginViewController *controller = [weakSelf buildLogin];
-        controller.defaultUsername = signUpController.emailField.textField.text;
+        controller.identifier = signUpController.emailField.textField.text;
         [weakSelf displayController:controller];
     }];
     return signUpController;
@@ -74,17 +81,50 @@
 
 - (A0DatabaseLoginViewController *)buildLogin {
     __weak A0TouchIDRegisterViewController *weakSelf = self;
+    void (^uploadKey)(NSString *, A0UserProfile *, A0Token *) = ^(NSString *authorization, A0UserProfile *profile, A0Token *token) {
+        A0KeyUploader *uploader = [[A0KeyUploader alloc] initWithDomainURL:[weakSelf.lock domainURL]
+                                                                  clientId:[weakSelf.lock clientId]
+                                                             authorization:authorization];
+        weakSelf.onRegisterBlock(uploader, profile.userId);
+    };
+    void(^success)(A0DatabaseLoginViewController *, A0UserProfile *, A0Token *) = ^(A0DatabaseLoginViewController *controller, A0UserProfile *profile, A0Token *token) {
+        NSString *connection = weakSelf.parameters[@"connection"];
+        NSString *authorization = [A0KeyUploader authorizationWithUsername:controller.loginView.identifier password:controller.loginView.password connectionName:connection];
+        uploadKey(authorization, profile, token);
+    };
+
     A0DatabaseLoginViewController *controller = [[A0DatabaseLoginViewController alloc] init];
     controller.parameters = self.parameters;
-    controller.onLoginBlock = self.onRegisterBlock;
+    controller.onLoginBlock = success;
+    controller.onMFARequired = ^(NSString *connectionName, NSString *identifier, NSString *password) {
+        A0LogDebug(@"Required to ask MFA for user with identifier %@ and connection %@", identifier, connectionName);
+        A0MFACodeViewController *controller = [[A0MFACodeViewController alloc] initWithIdentifier:identifier password:password connectionName:connectionName];
+        controller.onLoginBlock = ^(A0UserProfile *profile, A0Token *token) {
+            NSString *connection = weakSelf.parameters[@"connection"];
+            NSString *authorization = [A0KeyUploader authorizationWithUsername:identifier password:password connectionName:connection];
+            uploadKey(authorization, profile, token);
+        };
+        controller.parameters = [weakSelf.parameters copy];
+        [weakSelf.navigationView removeAll];
+        [weakSelf.navigationView addButtonWithLocalizedTitle:A0LocalizedString(@"CANCEL") actionBlock:^{
+            A0DatabaseLoginViewController *controller = [weakSelf buildLogin];
+            controller.identifier = identifier;
+            [weakSelf displayController:controller];
+        }];
+        [weakSelf displayController:controller];
+    };
     controller.lock = self.lock;
     [self.navigationView removeAll];
     [self.navigationView addButtonWithLocalizedTitle:A0LocalizedString(@"CANCEL") actionBlock:^{
-        [weakSelf displayController:[weakSelf buildSignUp]];
+        if(weakSelf.disableSignUp) {
+            weakSelf.onCancelBlock();
+        } else {
+            [weakSelf displayController:[weakSelf buildSignUp]];
+        }
     }];
     [self.navigationView addButtonWithLocalizedTitle:A0LocalizedString(@"RESET PASSWORD") actionBlock:^{
         A0ChangePasswordViewController *resetController = [weakSelf buildChangePassword];
-        resetController.defaultEmail = controller.userField.textField.text;
+        resetController.email = controller.identifier;
         [weakSelf displayController:resetController];
     }];
     return controller;
@@ -101,7 +141,7 @@
     [self.navigationView removeAll];
     [self.navigationView addButtonWithLocalizedTitle:A0LocalizedString(@"CANCEL") actionBlock:^{
         A0DatabaseLoginViewController *loginController = [weakSelf buildLogin];
-        loginController.defaultUsername = controller.userField.textField.text;
+        loginController.identifier = controller.email;
         [weakSelf displayController:loginController];
     }];
     return controller;

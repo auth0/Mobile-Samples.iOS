@@ -24,10 +24,6 @@
 
 @class A0UserProfile, A0Token, A0AuthParameters, A0Lock;
 
-FOUNDATION_EXPORT NSString * const A0ThemeTouchIDLockButtonImageNormalName;
-FOUNDATION_EXPORT NSString * const A0ThemeTouchIDLockButtonImageHighlightedName;
-FOUNDATION_EXPORT NSString * const A0ThemeTouchIDLockContainerBackgroundColor;
-
 /**
  *  Controller used to start passwordless authentication with TouchID.
  *  Must be displayed inside a UINavigationController.
@@ -56,6 +52,21 @@ FOUNDATION_EXPORT NSString * const A0ThemeTouchIDLockContainerBackgroundColor;
  Allows the A0AuthenticationViewController to be dismissed by adding a button. Default is NO
  */
 @property (assign, nonatomic) BOOL closable;
+
+/**
+ * Hides the Sign Up button. By default is `false`.
+ */
+@property (assign, nonatomic) BOOL disableSignUp;
+
+/**
+ * When controller is presented, it will remove any stored key (if any) and the user will be prompted to enroll again. By default it's NO
+ */
+@property (assign, nonatomic) BOOL cleanOnStart;
+
+/**
+ * If login with TouchID fails, it will clean up stored keys and the user will be prompted to enroll again on start. By default it's NO
+ */
+@property (assign, nonatomic) BOOL cleanOnError;
 
 /**
  Block that is called on successful authentication. It has two parameters profile and token, which will be non-nil unless login is disabled after signup.
