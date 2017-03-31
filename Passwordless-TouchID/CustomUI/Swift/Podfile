@@ -3,9 +3,9 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'MyTouchID' do
-  pod 'Lock/Core', '~> 1.19'
+  pod 'Lock/Core', '~> 1.28'
   pod 'Lock/WebView'
-  pod 'TouchIDAuth', '~> 0.1'
-  pod 'SimpleKeychain', '~> 0.5'
+  pod 'TouchIDAuth', '~> 0.2'
+  pod 'SimpleKeychain', '~> 0.7'
 end
 

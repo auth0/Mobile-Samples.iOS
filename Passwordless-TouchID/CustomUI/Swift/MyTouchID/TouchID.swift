@@ -33,8 +33,8 @@ struct TouchID {
 
     let authentication: A0TouchIDAuthentication
 
-    init(client: A0APIClient, userClient: A0UserAPIClient, userId: String, callback: Result -> ()) {
-        let device = UIDevice.currentDevice().identifierForVendor!.UUIDString
+    init(client: A0APIClient, userClient: A0UserAPIClient, userId: String, callback: @escaping (Result) -> Void) {
+        let device = UIDevice.current.identifierForVendor!.uuidString
         self.init(client: client, userId: userId, registerBlock: { (pubKey, completed, errored) in
             let registerBlock = {
                 userClient.registerPublicKey(pubKey,
@@ -43,19 +43,20 @@ struct TouchID {
                     success: { completed() },
                     failure: { error in errored(error) })
             }
-            userClient.removePublicKeyOfDevice(device,
+
+            userClient.removePublicKey(ofDevice: device,
                 user:userId,
                 success: { registerBlock() },
-                failure: { error in registerBlock() })
+                failure: { _ in registerBlock() })
             }, callback: callback)
     }
 
-    init(client: A0APIClient, userId: String, callback: Result -> ()) {
+    init(client: A0APIClient, userId: String, callback: @escaping (Result) -> Void) {
         self.init(client: client, userId: userId, registerBlock: { (_, completed, _) in completed() }, callback: callback)
     }
 
-    init(client: A0APIClient, userId: String, registerBlock: (NSData!, A0RegisterCompletionBlock!, A0ErrorBlock!) -> (), callback: Result -> ()) {
-        let device = UIDevice.currentDevice().identifierForVendor!.UUIDString
+    init(client: A0APIClient, userId: String, registerBlock: @escaping (Data, @escaping A0RegisterCompletionBlock,@escaping A0ErrorBlock) -> Void, callback: @escaping (Result) -> Void) {
+        let device = UIDevice.current.identifierForVendor!.uuidString
 
         let authentication = A0TouchIDAuthentication()
         authentication.registerPublicKey = registerBlock
@@ -68,11 +69,11 @@ struct TouchID {
         }
 
         authentication.authenticate = { (jwt, block) in
-            let parameters = A0AuthParameters.newWithDictionary([
+            let parameters = A0AuthParameters.new(with: [
                 A0ScopeProfile: "openid name email nickname"
                 ])
 
-            client.loginWithIdToken(jwt,
+            client.login(withIdToken: jwt,
                 deviceName: device,
                 parameters: parameters,
                 success: { (profile, token) in
@@ -81,7 +82,7 @@ struct TouchID {
                 failure: { (error) in block(error) })
         }
         authentication.onError = { error in
-            callback(.Error(error))
+            callback(.Error(error as NSError))
         }
 
         self.authentication = authentication

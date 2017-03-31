@@ -31,31 +31,31 @@ class LoginViewController: UIViewController {
     var touchID: TouchID!
     var userId: String?
 
-    enum Key : String {
+    enum Key: String {
         case UserId = "com.auth0.mytouchid.user"
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let defaults = NSUserDefaults.standardUserDefaults()
-        self.userId = defaults.stringForKey(Key.UserId.rawValue)
-        self.touchIDButton.enabled = self.userId != nil
+        let defaults = UserDefaults.standard
+        self.userId = defaults.string(forKey: Key.UserId.rawValue)
+        self.touchIDButton.isEnabled = self.userId != nil
     }
 
-    @IBAction func loginWithInstagram(sender: AnyObject) {
-        self.loginWithConnectionName("instagram")
+    @IBAction func loginWithSocial(sender: AnyObject) {
+        self.loginWithConnectionName(connection: "twitter")
     }
-    
+
     @IBAction func loginWithTouchID(sender: AnyObject) {
-        let lock = MyApplication.sharedInstance.lock
+        let lock = A0Lock.shared()
         if let userId = self.userId {
-            self.touchID = TouchID(client: lock.apiClient(), userId: userId) { result -> () in
+            self.touchID = TouchID(client: lock.apiClient(), userId: userId) { result -> Void in
                 switch(result) {
                 case .Success(let profile, let token):
-                    self.showAlertWithTitle("Authenticated with Touch ID", message: "Authenticated user \(profile.nickname)")
+                    self.showAlertWithTitle(title: "Authenticated with Touch ID", message: "Authenticated user \(profile.nickname)")
                     print("Authenticated user \(profile.name) id_token \(token.idToken)")
                 case .Error(let error):
-                    self.showAlertWithTitle("Failed to authenticate", message: "Failed to authenticate with Touch ID with error \(error.localizedDescription)");
+                    self.showAlertWithTitle(title: "Failed to authenticate", message: "Failed to authenticate with Touch ID with error \(error.localizedDescription)")
                     print("Failed to enroll Touch ID with error \(error)")
                 }
             }
@@ -64,35 +64,35 @@ class LoginViewController: UIViewController {
     }
 
     private func loginWithConnectionName(connection: String) {
-        let lock = MyApplication.sharedInstance.lock
+        let lock = A0Lock.shared()
 
-        lock.identityProviderAuthenticator().authenticateWithConnectionName(connection, parameters: nil,
-            success: {[weak self] (profile, token) -> () in
-                let userClient = lock.newUserAPIClientWithIdToken(token.idToken)
-                self?.touchID = TouchID(client: lock.apiClient(), userClient: userClient, userId: profile.userId) { result -> () in
+        lock.identityProviderAuthenticator().authenticate(withConnectionName: connection, parameters: nil,
+            success: {[weak self] (profile, token) -> Void in
+                let userClient = lock.newUserAPIClient(withIdToken: token.idToken)
+                self?.touchID = TouchID(client: lock.apiClient(), userClient: userClient, userId: profile.userId) { result -> Void in
                     switch(result) {
                     case .Success(let profile, let token):
-                        let defaults = NSUserDefaults.standardUserDefaults()
-                        defaults.setObject(profile.userId, forKey: Key.UserId.rawValue)
+                        let defaults = UserDefaults.standard
+                        defaults.set(profile.userId, forKey: Key.UserId.rawValue)
                         defaults.synchronize()
-                        self?.showAlertWithTitle("Authenticated with Touch ID", message: "Authenticated user \(profile.nickname)")
+                        self?.showAlertWithTitle(title: "Authenticated with Touch ID", message: "Authenticated user \(profile.nickname)")
                         print("Authenticated user \(profile.name) id_token \(token.idToken)")
                     case .Error(let error):
-                        self?.showAlertWithTitle("Failed to authenticate", message: "Failed to authenticate with Touch ID with error \(error.localizedDescription)");
+                        self?.showAlertWithTitle(title: "Failed to authenticate", message: "Failed to authenticate with Touch ID with error \(error.localizedDescription)")
                         print("Failed to authenticate with Touch ID with error \(error)")
                     }
                 }
                 self?.touchID.reset()
                 self?.touchID.authenticate()
             },
-            failure: { (error) -> () in
+            failure: { (error) -> Void in
                 print("Failed with error \(error)")
         })
     }
 
     private func showAlertWithTitle(title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-        self.presentViewController(alertController, animated: true) {}
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alertController, animated: true) {}
     }
 }

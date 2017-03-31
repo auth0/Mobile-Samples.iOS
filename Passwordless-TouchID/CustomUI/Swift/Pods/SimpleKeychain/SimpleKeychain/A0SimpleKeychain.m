@@ -240,7 +240,7 @@
             accessibility = kSecAttrAccessibleWhenUnlockedThisDeviceOnly;
             break;
         default:
-            accessibility = kSecAttrAccessibleAfterFirstUnlock;
+            accessibility = kSecAttrAccessibleWhenUnlockedThisDeviceOnly;
     }
     return accessibility;
 }
@@ -356,8 +356,10 @@
                                       (__bridge id)kSecAttrAccount: key,
                                       }];
 #if TARGET_OS_IPHONE
-    if (message) {
-        query[(__bridge id)kSecUseOperationPrompt] = message;
+    if (self.useAccessControl) {
+        if (message && floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1) {
+            query[(__bridge id)kSecUseOperationPrompt] = message;
+        }
     }
 #endif
 

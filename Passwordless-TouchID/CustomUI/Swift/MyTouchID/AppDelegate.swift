@@ -21,20 +21,19 @@
 // THE SOFTWARE.
 
 import UIKit
+import Lock
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        MyApplication.sharedInstance.lock.applicationLaunchedWithOptions(launchOptions)
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        A0Lock.shared().applicationLaunched(options: launchOptions)
         return true
     }
 
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        return MyApplication.sharedInstance.lock.handleURL(url, sourceApplication: sourceApplication)
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        return A0Lock.shared().handle(url as URL, sourceApplication: sourceApplication)
     }
 }
-
