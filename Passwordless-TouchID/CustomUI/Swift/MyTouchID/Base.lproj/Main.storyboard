@@ -1,7 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -13,39 +17,35 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to MyTouch ID app!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evm-rX-X7f">
-                                <rect key="frame" x="188" y="127" width="224" height="21"/>
-                                <animations/>
+                                <rect key="frame" x="75.5" y="127" width="224" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AWJ-AM-81E">
-                                <rect key="frame" x="210" y="431" width="180" height="44"/>
-                                <animations/>
+                                <rect key="frame" x="97.5" y="498" width="180" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="fSA-ZD-Zzw"/>
                                     <constraint firstAttribute="height" constant="44" id="rKg-zP-8lB"/>
                                 </constraints>
-                                <state key="normal" title="Login with Instagram"/>
+                                <state key="normal" title="Login with Twitter"/>
                                 <connections>
-                                    <action selector="loginWithInstagram:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ROR-e3-S0o"/>
+                                    <action selector="loginWithSocialWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dMy-Dx-bhc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kCf-vN-SMU">
-                                <rect key="frame" x="210" y="506" width="180" height="44"/>
-                                <animations/>
+                                <rect key="frame" x="97.5" y="573" width="180" height="44"/>
                                 <state key="normal" title="Login with Touch ID"/>
                                 <connections>
-                                    <action selector="loginWithTouchID:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ffB-DT-u6e"/>
+                                    <action selector="loginWithTouchIDWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2R3-M0-8pD"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="kCf-vN-SMU" firstAttribute="width" secondItem="AWJ-AM-81E" secondAttribute="width" id="4N5-OE-3L8"/>
                             <constraint firstItem="kCf-vN-SMU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4ct-t1-joA"/>

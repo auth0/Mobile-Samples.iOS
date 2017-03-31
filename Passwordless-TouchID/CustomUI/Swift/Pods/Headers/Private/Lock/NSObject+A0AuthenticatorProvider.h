@@ -1,1 +1,0 @@
-../../../Lock/Pod/Classes/Core/iOS/NSObject+A0AuthenticatorProvider.h

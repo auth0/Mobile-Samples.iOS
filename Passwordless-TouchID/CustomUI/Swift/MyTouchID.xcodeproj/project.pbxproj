@@ -7,19 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0D68644AD5E7A1912370C478 /* Pods_MyTouchID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52999A94A61AE0D2A3F8A5DE /* Pods_MyTouchID.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		5B7954B51E8DB0570025F1DD /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B7954B41E8DB0570025F1DD /* Auth0.plist */; };
 		5F7ED2C51BC7048F007E3D6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7ED2C41BC7048F007E3D6C /* AppDelegate.swift */; };
 		5F7ED2CA1BC7048F007E3D6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F7ED2C81BC7048F007E3D6C /* Main.storyboard */; };
 		5F7ED2CC1BC7048F007E3D6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F7ED2CB1BC7048F007E3D6C /* Assets.xcassets */; };
 		5F7ED2CF1BC7048F007E3D6C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F7ED2CD1BC7048F007E3D6C /* LaunchScreen.storyboard */; };
-		5F7ED2D71BC70D8A007E3D6C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7ED2D61BC70D8A007E3D6C /* LoginViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		5F7ED2D91BC70EFF007E3D6C /* MyApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7ED2D81BC70EFF007E3D6C /* MyApplication.swift */; settings = {ASSET_TAGS = (); }; };
-		5F7ED2DB1BC710E3007E3D6C /* TouchID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7ED2DA1BC710E3007E3D6C /* TouchID.swift */; settings = {ASSET_TAGS = (); }; };
+		5F7ED2D71BC70D8A007E3D6C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7ED2D61BC70D8A007E3D6C /* LoginViewController.swift */; };
+		5F7ED2DB1BC710E3007E3D6C /* TouchID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7ED2DA1BC710E3007E3D6C /* TouchID.swift */; };
+		D1E2812EE2C7D955147217F0 /* Pods_MyTouchID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AA0DA0220A88C6EB742138F /* Pods_MyTouchID.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		06647E9740770DFFFD83050D /* Pods-MyTouchID.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTouchID.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyTouchID/Pods-MyTouchID.release.xcconfig"; sourceTree = "<group>"; };
-		52999A94A61AE0D2A3F8A5DE /* Pods_MyTouchID.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTouchID.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A9F8ACD68B1C437EC67D9A8 /* Pods-MyTouchID.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTouchID.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyTouchID/Pods-MyTouchID.debug.xcconfig"; sourceTree = "<group>"; };
+		5B7954B41E8DB0570025F1DD /* Auth0.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = SOURCE_ROOT; };
 		5F7ED2C11BC7048F007E3D6C /* MyTouchID.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTouchID.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F7ED2C41BC7048F007E3D6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F7ED2C91BC7048F007E3D6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -27,9 +27,9 @@
 		5F7ED2CE1BC7048F007E3D6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5F7ED2D01BC7048F007E3D6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5F7ED2D61BC70D8A007E3D6C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		5F7ED2D81BC70EFF007E3D6C /* MyApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyApplication.swift; sourceTree = "<group>"; };
 		5F7ED2DA1BC710E3007E3D6C /* TouchID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchID.swift; sourceTree = "<group>"; };
-		C30BE78A80DAE2EA75655E17 /* Pods-MyTouchID.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTouchID.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyTouchID/Pods-MyTouchID.debug.xcconfig"; sourceTree = "<group>"; };
+		7AA0DA0220A88C6EB742138F /* Pods_MyTouchID.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTouchID.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F8075A9DB90837D1BC02278 /* Pods-MyTouchID.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTouchID.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyTouchID/Pods-MyTouchID.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,20 +37,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0D68644AD5E7A1912370C478 /* Pods_MyTouchID.framework in Frameworks */,
+				D1E2812EE2C7D955147217F0 /* Pods_MyTouchID.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5E095E870A5B48CFBBD23C9D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3A9F8ACD68B1C437EC67D9A8 /* Pods-MyTouchID.debug.xcconfig */,
+				9F8075A9DB90837D1BC02278 /* Pods-MyTouchID.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		5F7ED2B81BC7048F007E3D6C = {
 			isa = PBXGroup;
 			children = (
 				5F7ED2C31BC7048F007E3D6C /* MyTouchID */,
 				5F7ED2C21BC7048F007E3D6C /* Products */,
-				A2B4025915D776E1E1B5456A /* Pods */,
-				65BC27E6796C8FC9D1C13B31 /* Frameworks */,
+				5E095E870A5B48CFBBD23C9D /* Pods */,
+				EA57EE065EAEA4C75E7A33F1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,33 +74,24 @@
 		5F7ED2C31BC7048F007E3D6C /* MyTouchID */ = {
 			isa = PBXGroup;
 			children = (
+				5B7954B41E8DB0570025F1DD /* Auth0.plist */,
 				5F7ED2C41BC7048F007E3D6C /* AppDelegate.swift */,
 				5F7ED2C81BC7048F007E3D6C /* Main.storyboard */,
 				5F7ED2CB1BC7048F007E3D6C /* Assets.xcassets */,
 				5F7ED2CD1BC7048F007E3D6C /* LaunchScreen.storyboard */,
 				5F7ED2D01BC7048F007E3D6C /* Info.plist */,
 				5F7ED2D61BC70D8A007E3D6C /* LoginViewController.swift */,
-				5F7ED2D81BC70EFF007E3D6C /* MyApplication.swift */,
 				5F7ED2DA1BC710E3007E3D6C /* TouchID.swift */,
 			);
 			path = MyTouchID;
 			sourceTree = "<group>";
 		};
-		65BC27E6796C8FC9D1C13B31 /* Frameworks */ = {
+		EA57EE065EAEA4C75E7A33F1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				52999A94A61AE0D2A3F8A5DE /* Pods_MyTouchID.framework */,
+				7AA0DA0220A88C6EB742138F /* Pods_MyTouchID.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		A2B4025915D776E1E1B5456A /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				C30BE78A80DAE2EA75655E17 /* Pods-MyTouchID.debug.xcconfig */,
-				06647E9740770DFFFD83050D /* Pods-MyTouchID.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -101,12 +101,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5F7ED2D31BC7048F007E3D6C /* Build configuration list for PBXNativeTarget "MyTouchID" */;
 			buildPhases = (
-				F790E5DB1183087D16EC55EC /* Check Pods Manifest.lock */,
+				2024960030882210155E131A /* [CP] Check Pods Manifest.lock */,
 				5F7ED2BD1BC7048F007E3D6C /* Sources */,
 				5F7ED2BE1BC7048F007E3D6C /* Frameworks */,
 				5F7ED2BF1BC7048F007E3D6C /* Resources */,
-				203461D8754CF54B20DA7AD6 /* Copy Pods Resources */,
-				C70EC5C15732E39777ED0DDD /* Embed Pods Frameworks */,
+				82217C2ED8AD1AEF3F03BBE6 /* [CP] Embed Pods Frameworks */,
+				FB3B9F92BE7BE54B73729903 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -123,11 +123,12 @@
 		5F7ED2B91BC7048F007E3D6C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Auth0;
 				TargetAttributes = {
 					5F7ED2C01BC7048F007E3D6C = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = 2NUJ273DRF;
 					};
 				};
 			};
@@ -157,35 +158,36 @@
 				5F7ED2CF1BC7048F007E3D6C /* LaunchScreen.storyboard in Resources */,
 				5F7ED2CC1BC7048F007E3D6C /* Assets.xcassets in Resources */,
 				5F7ED2CA1BC7048F007E3D6C /* Main.storyboard in Resources */,
+				5B7954B51E8DB0570025F1DD /* Auth0.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		203461D8754CF54B20DA7AD6 /* Copy Pods Resources */ = {
+		2024960030882210155E131A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MyTouchID/Pods-MyTouchID-resources.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		C70EC5C15732E39777ED0DDD /* Embed Pods Frameworks */ = {
+		82217C2ED8AD1AEF3F03BBE6 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -193,19 +195,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MyTouchID/Pods-MyTouchID-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F790E5DB1183087D16EC55EC /* Check Pods Manifest.lock */ = {
+		FB3B9F92BE7BE54B73729903 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MyTouchID/Pods-MyTouchID-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -217,7 +219,6 @@
 			files = (
 				5F7ED2DB1BC710E3007E3D6C /* TouchID.swift in Sources */,
 				5F7ED2D71BC70D8A007E3D6C /* LoginViewController.swift in Sources */,
-				5F7ED2D91BC70EFF007E3D6C /* MyApplication.swift in Sources */,
 				5F7ED2C51BC7048F007E3D6C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,8 +258,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -302,8 +305,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -322,6 +327,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -329,25 +335,29 @@
 		};
 		5F7ED2D41BC7048F007E3D6C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C30BE78A80DAE2EA75655E17 /* Pods-MyTouchID.debug.xcconfig */;
+			baseConfigurationReference = 3A9F8ACD68B1C437EC67D9A8 /* Pods-MyTouchID.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2NUJ273DRF;
 				INFOPLIST_FILE = MyTouchID/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.auth0.MyTouchID;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		5F7ED2D51BC7048F007E3D6C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 06647E9740770DFFFD83050D /* Pods-MyTouchID.release.xcconfig */;
+			baseConfigurationReference = 9F8075A9DB90837D1BC02278 /* Pods-MyTouchID.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2NUJ273DRF;
 				INFOPLIST_FILE = MyTouchID/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.auth0.MyTouchID;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
