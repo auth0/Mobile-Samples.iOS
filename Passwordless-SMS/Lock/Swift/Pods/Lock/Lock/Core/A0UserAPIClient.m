@@ -43,8 +43,6 @@ typedef void (^AFFailureBlock)(NSURLSessionDataTask *, NSError *);
 
 @implementation A0UserAPIClient
 
-AUTH0_DYNAMIC_LOGGER_METHODS
-
 - (instancetype)initWithRouter:(id<A0APIRouter>)router {
     NSAssert(router, @"Must supply a non nil router");
     self = [super init];
@@ -83,47 +81,11 @@ AUTH0_DYNAMIC_LOGGER_METHODS
 - (void)fetchUserProfileSuccess:(A0UserAPIClientUserProfileSuccess)success
                         failure:(A0UserAPIClientError)failure {
     A0LogVerbose(@"Fetching User Profile");
-    [self.manager GET:[self.router userInfoPath] parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self.manager GET:[self.router userInfoPath] parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         A0LogDebug(@"Obtained user profile %@", responseObject);
         if (success) {
             A0UserProfile *profile = [[A0UserProfile alloc] initWithDictionary:responseObject];
             success(profile);
-        }
-    } failure:[A0UserAPIClient sanitizeFailureBlock:failure]];
-}
-
-#pragma mark - Public Key
-
-- (void)registerPublicKey:(NSData *)pubKey
-                   device:(NSString *)deviceName
-                     user:(NSString *)userId
-                  success:(void (^)())success
-                  failure:(A0UserAPIClientError)failure {
-    NSDictionary *parameters = @{
-                                 @"public_key": [[NSString alloc] initWithData:pubKey encoding:NSUTF8StringEncoding],
-                                 A0ParameterDevice: deviceName,
-                                 };
-    A0LogVerbose(@"Registering public key for user %@ and device %@", userId, deviceName);
-    [self.manager POST:[self.router userPublicKeyPathForUser:userId] parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
-        A0LogDebug(@"Registered public key %@", responseObject);
-        if (success) {
-            success();
-        }
-    } failure:[A0UserAPIClient sanitizeFailureBlock:failure]];
-}
-
-- (void)removePublicKeyOfDevice:(NSString *)deviceName
-                           user:(NSString *)userId
-                        success:(void (^)())success
-                        failure:(A0UserAPIClientError)failure {
-    NSDictionary *parameters = @{
-                                 A0ParameterDevice: deviceName,
-                                 };
-    A0LogVerbose(@"Removing public key for user %@ and device %@", userId, deviceName);
-    [self.manager DELETE:[self.router userPublicKeyPathForUser:userId] parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
-        A0LogDebug(@"Removed public key with response %@", responseObject);
-        if (success) {
-            success();
         }
     } failure:[A0UserAPIClient sanitizeFailureBlock:failure]];
 }
@@ -174,6 +136,42 @@ AUTH0_DYNAMIC_LOGGER_METHODS
     A0APIv1Router *router = [[A0APIv1Router alloc] initWithClientId:lock.clientId domainURL:lock.domainURL configurationURL:lock.configurationURL];
     A0UserAPIClient *client = [[A0UserAPIClient alloc] initWithRouter:router idToken:idToken];
     return client;
+}
+
+#pragma mark - Public Key
+
+- (void)registerPublicKey:(NSData *)pubKey
+                   device:(NSString *)deviceName
+                     user:(NSString *)userId
+                  success:(void (^)())success
+                  failure:(A0UserAPIClientError)failure {
+    NSDictionary *parameters = @{
+                                 @"public_key": [[NSString alloc] initWithData:pubKey encoding:NSUTF8StringEncoding],
+                                 A0ParameterDevice: deviceName,
+                                 };
+    A0LogVerbose(@"Registering public key for user %@ and device %@", userId, deviceName);
+    [self.manager POST:[self.router userPublicKeyPathForUser:userId] parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        A0LogDebug(@"Registered public key %@", responseObject);
+        if (success) {
+            success();
+        }
+    } failure:[A0UserAPIClient sanitizeFailureBlock:failure]];
+}
+
+- (void)removePublicKeyOfDevice:(NSString *)deviceName
+                           user:(NSString *)userId
+                        success:(void (^)())success
+                        failure:(A0UserAPIClientError)failure {
+    NSDictionary *parameters = @{
+                                 A0ParameterDevice: deviceName,
+                                 };
+    A0LogVerbose(@"Removing public key for user %@ and device %@", userId, deviceName);
+    [self.manager DELETE:[self.router userPublicKeyPathForUser:userId] parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        A0LogDebug(@"Removed public key with response %@", responseObject);
+        if (success) {
+            success();
+        }
+    } failure:[A0UserAPIClient sanitizeFailureBlock:failure]];
 }
 
 @end

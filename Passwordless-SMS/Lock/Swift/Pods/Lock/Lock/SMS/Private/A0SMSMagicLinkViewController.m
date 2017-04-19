@@ -28,6 +28,8 @@
 #import "A0LoadingView.h"
 #import "A0Errors.h"
 #import "Constants.h"
+#import "NSError+A0LockErrors.h"
+#import <Masonry/Masonry.h>
 
 const NSTimeInterval A0SMSMagicLinkRetryInSeconds = 40;
 
@@ -48,7 +50,7 @@ const NSTimeInterval A0SMSMagicLinkRetryInSeconds = 40;
 @implementation A0SMSMagicLinkViewController
 
 - (instancetype)initWithViewModel:(A0PasswordlessLockViewModel *)viewModel {
-    self = [self initWithNibName:NSStringFromClass(self.class) bundle:[NSBundle bundleForClass:self.class]];
+    self = [self init];
     if (self) {
         _viewModel = viewModel;
     }
@@ -57,6 +59,34 @@ const NSTimeInterval A0SMSMagicLinkRetryInSeconds = 40;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    UILabel *checkLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    UIButton *resendButton = [UIButton buttonWithType:UIButtonTypeSystem];
+
+    [self.view addSubview:checkLabel];
+    [self.view addSubview:messageLabel];
+    [self.view addSubview:resendButton];
+
+    [messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.view);
+        make.width.equalTo(@230);
+    }];
+    [checkLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(messageLabel.mas_top).offset(-30);
+        make.height.equalTo(@54);
+        make.width.equalTo(@54);
+        make.centerX.equalTo(self.view.mas_centerX);
+    }];
+    [resendButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.top.equalTo(messageLabel.mas_bottom).offset(20);
+    }];
+
+    self.checkLabel = checkLabel;
+    self.messageLabel = messageLabel;
+    self.resendButton = resendButton;
+
     self.title = A0LocalizedString(@"Magic Link Sent");
 
     A0Theme *theme = [A0Theme sharedInstance];
@@ -71,18 +101,27 @@ const NSTimeInterval A0SMSMagicLinkRetryInSeconds = 40;
                                                                                  NSFontAttributeName: [UIFont boldSystemFontOfSize:font.pointSize],
                                                                                  }]];
     self.messageLabel.attributedText = message;
+    self.messageLabel.textAlignment = NSTextAlignmentCenter;
+    self.messageLabel.numberOfLines = 3;
 
-    self.checkLabel.layer.cornerRadius = self.checkLabel.frame.size.height / 2;
+    self.checkLabel.textAlignment = NSTextAlignmentCenter;
+    self.checkLabel.layer.cornerRadius = 27;
     self.checkLabel.layer.masksToBounds = YES;
-    
+    self.checkLabel.backgroundColor = [UIColor colorWithRed:0.5686 green:0.749 blue:0.3059 alpha:1.0];
+    self.checkLabel.text = @"✓";
+    self.checkLabel.textColor = [UIColor whiteColor];
+    self.checkLabel.font = [UIFont systemFontOfSize:45];
+
     [self scheduleToEnableResend];
+    [self.resendButton setTitle:A0LocalizedString(@"Resend") forState:UIControlStateNormal];
     self.resendButton.tintColor = [theme colorForKey:A0ThemePrimaryButtonNormalColor];
+    [self.resendButton addTarget:self action:@selector(resend:) forControlEvents:UIControlEventTouchUpInside];
 
     __weak A0SMSMagicLinkViewController *weakSelf = self;
     self.viewModel.onMagicLink = ^(NSError *error, BOOL completed) {
         if (error) {
             NSString *title = [error a0_auth0ErrorWithCode:A0ErrorCodeNotConnectedToInternet] ? error.localizedDescription : A0LocalizedString(@"There was an error logging in");
-            NSString *message = [error a0_auth0ErrorWithCode:A0ErrorCodeNotConnectedToInternet] ? error.localizedFailureReason : [A0Errors localizedStringForLoginError:error];
+            NSString *message = [error a0_auth0ErrorWithCode:A0ErrorCodeNotConnectedToInternet] ? error.localizedFailureReason : [error a0_localizedStringForLoginError];
             [A0Alert showInController:weakSelf errorAlert:^(A0Alert *alert) {
                 alert.title = title;
                 alert.message = message;

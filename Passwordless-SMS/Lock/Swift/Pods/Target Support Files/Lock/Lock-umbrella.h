@@ -1,4 +1,14 @@
+#ifdef __OBJC__
 #import <UIKit/UIKit.h>
+#else
+#ifndef FOUNDATION_EXPORT
+#if defined(__cplusplus)
+#define FOUNDATION_EXPORT extern "C"
+#else
+#define FOUNDATION_EXPORT extern
+#endif
+#endif
+#endif
 
 #import "A0APIClient.h"
 #import "A0APIClientProvider.h"
@@ -22,13 +32,17 @@
 #import "A0LockNotification.h"
 #import "A0MainBundleCredentialProvider.h"
 #import "A0PasswordStrengthErrorHandler.h"
+#import "A0PKCE.h"
 #import "A0RuleErrorHandler.h"
 #import "A0SimpleConnectionDomainMatcher.h"
 #import "A0Strategy.h"
+#import "A0Telemetry.h"
 #import "A0Token.h"
 #import "A0UserAPIClient.h"
 #import "A0UserIdentity.h"
 #import "A0UserProfile.h"
+#import "NSError+A0AuthAPIError.h"
+#import "NSError+A0LockErrors.h"
 #import "Lock.h"
 #import "A0DeviceNameProvider.h"
 #import "NSObject+A0AuthenticatorProvider.h"
@@ -50,6 +64,7 @@
 #import "UIButton+A0SolidButton.h"
 #import "A0Lock+A0SMSLockViewController.h"
 #import "A0SMSLockViewController.h"
+#import "A0ChangePasswordView.h"
 #import "A0ConfirmPasswordValidator.h"
 #import "A0ContainerViewController.h"
 #import "A0KeyboardEnabledView.h"
@@ -58,6 +73,9 @@
 #import "A0LockEventDelegate.h"
 #import "A0LockSignUpViewController.h"
 #import "A0LockViewController.h"
+#import "A0LoginView.h"
+#import "A0MFACodeView.h"
+#import "A0SignUpView.h"
 #import "UI.h"
 
 FOUNDATION_EXPORT double LockVersionNumber;

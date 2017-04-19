@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		595DD37BFE280AB18B075BEF /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED0CB92088CF0C3F1E503C4 /* Pods.framework */; };
+		10358C83B2FA922E71301D56 /* Pods_Passwordless_SMS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8858AB70CA0BFCBED6747F86 /* Pods_Passwordless_SMS.framework */; };
+		5B6E02C21EA7AB1100B28579 /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B6E02C11EA7AB1100B28579 /* Auth0.plist */; };
 		5F8748011BBAF84200FD4836 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8748001BBAF84200FD4836 /* AppDelegate.swift */; };
 		5F8748061BBAF84200FD4836 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F8748041BBAF84200FD4836 /* Main.storyboard */; };
 		5F8748081BBAF84200FD4836 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F8748071BBAF84200FD4836 /* Assets.xcassets */; };
@@ -18,7 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2D3411FFE6DA4BE3809DBE9E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		33F8DBC0BCD4D435123DABB6 /* Pods-Passwordless-SMS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passwordless-SMS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Passwordless-SMS/Pods-Passwordless-SMS.debug.xcconfig"; sourceTree = "<group>"; };
+		46633E3E19769ABB9DA1B63D /* Pods-Passwordless-SMS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passwordless-SMS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Passwordless-SMS/Pods-Passwordless-SMS.release.xcconfig"; sourceTree = "<group>"; };
+		5B6E02C11EA7AB1100B28579 /* Auth0.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = "<group>"; };
 		5F8747FD1BBAF84200FD4836 /* Passwordless-SMS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Passwordless-SMS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F8748001BBAF84200FD4836 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F8748051BBAF84200FD4836 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -28,7 +31,7 @@
 		5F8748121BBAF90D00FD4836 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		5F8748141BBAF91600FD4836 /* RequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestViewController.swift; sourceTree = "<group>"; };
 		5F8748161BBAFB7A00FD4836 /* Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
-		8025AB63CA618BF0C96C8E0E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		8858AB70CA0BFCBED6747F86 /* Pods_Passwordless_SMS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Passwordless_SMS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BED0CB92088CF0C3F1E503C4 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -37,7 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				595DD37BFE280AB18B075BEF /* Pods.framework in Frameworks */,
+				10358C83B2FA922E71301D56 /* Pods_Passwordless_SMS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,8 +52,8 @@
 			children = (
 				5F8747FF1BBAF84200FD4836 /* Passwordless-SMS */,
 				5F8747FE1BBAF84200FD4836 /* Products */,
-				8EB6498501C44488B4B5FCD3 /* Pods */,
 				AC5276A64C01BCE7F6997E81 /* Frameworks */,
+				A58C20EC8E41AD4838CBB3EE /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,6 +68,7 @@
 		5F8747FF1BBAF84200FD4836 /* Passwordless-SMS */ = {
 			isa = PBXGroup;
 			children = (
+				5B6E02C11EA7AB1100B28579 /* Auth0.plist */,
 				5F8748001BBAF84200FD4836 /* AppDelegate.swift */,
 				5F8748041BBAF84200FD4836 /* Main.storyboard */,
 				5F8748071BBAF84200FD4836 /* Assets.xcassets */,
@@ -77,11 +81,11 @@
 			path = "Passwordless-SMS";
 			sourceTree = "<group>";
 		};
-		8EB6498501C44488B4B5FCD3 /* Pods */ = {
+		A58C20EC8E41AD4838CBB3EE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2D3411FFE6DA4BE3809DBE9E /* Pods.debug.xcconfig */,
-				8025AB63CA618BF0C96C8E0E /* Pods.release.xcconfig */,
+				33F8DBC0BCD4D435123DABB6 /* Pods-Passwordless-SMS.debug.xcconfig */,
+				46633E3E19769ABB9DA1B63D /* Pods-Passwordless-SMS.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -90,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				BED0CB92088CF0C3F1E503C4 /* Pods.framework */,
+				8858AB70CA0BFCBED6747F86 /* Pods_Passwordless_SMS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -101,12 +106,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5F87480F1BBAF84200FD4836 /* Build configuration list for PBXNativeTarget "Passwordless-SMS" */;
 			buildPhases = (
-				B7CC54619F32580E08C13CA6 /* Check Pods Manifest.lock */,
+				BD80774CECBBADC16DDAF6E5 /* [CP] Check Pods Manifest.lock */,
 				5F8747F91BBAF84200FD4836 /* Sources */,
 				5F8747FA1BBAF84200FD4836 /* Frameworks */,
 				5F8747FB1BBAF84200FD4836 /* Resources */,
-				A26521CA805F7C0F4DB95CDA /* Embed Pods Frameworks */,
-				086D7C2743708ED8E9A4B90A /* Copy Pods Resources */,
+				71B8938830CAC8D8E3E7EC56 /* [CP] Embed Pods Frameworks */,
+				0683A728C71EB3025D05C539 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -128,6 +133,7 @@
 				TargetAttributes = {
 					5F8747FC1BBAF84200FD4836 = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0830;
 					};
 				};
 			};
@@ -157,55 +163,56 @@
 				5F87480B1BBAF84200FD4836 /* LaunchScreen.storyboard in Resources */,
 				5F8748081BBAF84200FD4836 /* Assets.xcassets in Resources */,
 				5F8748061BBAF84200FD4836 /* Main.storyboard in Resources */,
+				5B6E02C21EA7AB1100B28579 /* Auth0.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		086D7C2743708ED8E9A4B90A /* Copy Pods Resources */ = {
+		0683A728C71EB3025D05C539 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Passwordless-SMS/Pods-Passwordless-SMS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A26521CA805F7C0F4DB95CDA /* Embed Pods Frameworks */ = {
+		71B8938830CAC8D8E3E7EC56 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Passwordless-SMS/Pods-Passwordless-SMS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B7CC54619F32580E08C13CA6 /* Check Pods Manifest.lock */ = {
+		BD80774CECBBADC16DDAF6E5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -329,25 +336,27 @@
 		};
 		5F8748101BBAF84200FD4836 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2D3411FFE6DA4BE3809DBE9E /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 33F8DBC0BCD4D435123DABB6 /* Pods-Passwordless-SMS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Passwordless-SMS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.auth0.Passwordless-SMS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		5F8748111BBAF84200FD4836 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8025AB63CA618BF0C96C8E0E /* Pods.release.xcconfig */;
+			baseConfigurationReference = 46633E3E19769ABB9DA1B63D /* Pods-Passwordless-SMS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Passwordless-SMS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.auth0.Passwordless-SMS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

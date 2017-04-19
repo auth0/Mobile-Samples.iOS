@@ -29,13 +29,13 @@ class Application {
 
     var profile: A0UserProfile?
     var token: A0Token?
-    var nonSecurePingURL: NSURL
-    var securePingURL: NSURL
+    var nonSecurePingURL: URL
+    var securePingURL: URL
 
-    private init() {
-        let urlString = NSBundle.mainBundle().infoDictionary?["Auth0SampleURL"] as? String ?? "http://localhost:3001"
-        let baseURL = NSURL(string: urlString)
-        self.nonSecurePingURL = NSURL(string: "/ping", relativeToURL: baseURL)!
-        self.securePingURL = NSURL(string: "/secured/ping", relativeToURL: baseURL)!
+    fileprivate init() {
+        let urlString = Bundle.main.infoDictionary?["Auth0SampleURL"] as? String ?? "http://localhost:3001"
+        let baseURL = URL(string: urlString)
+        self.nonSecurePingURL = URL(string: "/ping", relativeTo: baseURL)!
+        self.securePingURL = URL(string: "/secured/ping", relativeTo: baseURL)!
     }
 }

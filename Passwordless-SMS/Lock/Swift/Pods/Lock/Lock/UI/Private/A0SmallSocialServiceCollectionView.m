@@ -38,6 +38,7 @@
 #import "NSError+A0APIError.h"
 #import "A0ServiceViewModel.h"
 #import "Constants.h"
+#import "NSError+A0LockErrors.h"
 
 #define kCellIdentifier @"ServiceCell"
 
@@ -52,7 +53,18 @@
 
 @implementation A0SmallSocialServiceCollectionView
 
-AUTH0_DYNAMIC_LOGGER_METHODS
+- (instancetype)init {
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    layout.itemSize = CGSizeMake(55, 55);
+    layout.minimumLineSpacing = 5;
+    layout.minimumInteritemSpacing = 5;
+    self = [super initWithFrame:CGRectZero collectionViewLayout:layout];
+    if (self) {
+        [self awakeFromNib];
+    }
+    return self;
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -60,9 +72,7 @@ AUTH0_DYNAMIC_LOGGER_METHODS
     self.delegate = self.layoutDelegate;
     self.dataSource = self;
     self.scrollEnabled = self.layoutDelegate.shouldScroll;
-    UINib *cellNib = [UINib nibWithNibName:NSStringFromClass([A0ServiceCollectionViewCell class])
-                                    bundle:[NSBundle bundleForClass:[self class]]];
-    [self registerNib:cellNib forCellWithReuseIdentifier:kCellIdentifier];
+    [self registerClass:A0ServiceCollectionViewCell.class forCellWithReuseIdentifier:kCellIdentifier];
 }
 
 - (void)showSocialServicesForConfiguration:(A0LockConfiguration *)configuration {
@@ -129,6 +139,7 @@ AUTH0_DYNAMIC_LOGGER_METHODS
     [cell.serviceButton setBackgroundColor:theme.highlightedBackgroundColor forState:UIControlStateHighlighted];
     [cell.serviceButton addTarget:self action:@selector(triggerAuth:) forControlEvents:UIControlEventTouchUpInside];
     cell.serviceButton.tag = indexPath.item;
+    cell.serviceButton.accessibilityLabel = theme.localizedTitle;
     return cell;
 }
 
