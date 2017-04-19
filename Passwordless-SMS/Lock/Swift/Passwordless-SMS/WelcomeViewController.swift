@@ -25,16 +25,17 @@ import Lock
 
 class WelcomeViewController: UIViewController {
 
-    @IBAction func tryLock(sender: AnyObject) {
-        let lock = A0Lock.sharedLock()
-        let controller = lock.newSMSViewController()
+    @IBAction func tryLock(_ sender: AnyObject) {
+        let lock = A0Lock.shared()
+        let controller: A0SMSLockViewController = lock.newSMSViewController()
         controller.onAuthenticationBlock = { (profile, token) in
             let app = Application.sharedInstance
             app.token = token
             app.profile = profile
-            self.dismissViewControllerAnimated(true, completion: { self.performSegueWithIdentifier("UserLoggedIn", sender: self) })
+            self.dismiss(animated: true, completion: { self.performSegue(withIdentifier: "UserLoggedIn", sender: self) })
         }
-        lock.presentSMSController(controller, fromController: self)
+        
+        lock.presentSMSController(controller, from: self)
     }
     
 }

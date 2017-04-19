@@ -98,6 +98,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly, nullable, nonatomic) A0Application *application;
 
 /**
+ *  Auth0's telemetry info sent along with every request
+ */
+@property (nullable, nonatomic) NSString *telemetryInfo;
+
+/**
  Fetches Auth0 application info from Auth0 and configure itself.
  @param success block called on successful fetch of app info. Application information will be passed as a block parameter.
  @param failure block called when fetch of App information fails and reason of failure will be in error parameter
@@ -196,10 +201,9 @@ NS_ASSUME_NONNULL_BEGIN
                                      failure:(A0APIClientError)failure;
 
 /**
- *  Change the password for a user.
+ *  Request a change password for the given user. Auth0 will send an email with a link to input a new password.
  *  By default it will use the first database connection name found in `application` property. If it's nil a *connection_name* must be set in parameters.
  *
- *  @param newPassword new password for the user
  *  @param username    username to change its password. It can be an email or a username
  *  @param parameters  optional parameters for Auth0 API. It can be nil
  *  @param success     block called on success
@@ -207,12 +211,10 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return an instance of `NSURLSessionDataTask`
  */
-- (NSURLSessionDataTask *)changePassword:(NSString *)newPassword
-                             forUsername:(NSString *)username
-                              parameters:(nullable A0AuthParameters *)parameters
-                                 success:(void(^)())success
-                                 failure:(A0APIClientError)failure;
-
+- (NSURLSessionDataTask *)requestChangePasswordForUsername:(NSString *)username
+                                                parameters:(nullable A0AuthParameters *)parameters
+                                                   success:(void(^)())success
+                                                   failure:(A0APIClientError)failure;
 
 /**
  *  Authenticates with a Database Connection using a signed JWT token.
@@ -349,6 +351,21 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSURLSessionDataTask *)fetchDelegationTokenWithParameters:(A0AuthParameters *)parameters
                                                      success:(A0APIClientNewDelegationTokenSuccess)success
                                                      failure:(A0APIClientError)failure;
+
+///----------------------------------------
+/// @name Token Request
+///----------------------------------------
+
+/**
+ *  Change an authorization code obtained from authorize endpoint for Auth0 token using the token endpoint
+ *
+ *  @param parameters sent to token endpoint
+ *  @param callback   called with an error or the Auth0 token obtained
+ *
+ *  @return an instance of `NSURLSessionDataTask`
+ */
+- (NSURLSessionDataTask *)requestTokenWithParameters:(NSDictionary *)parameters
+                                            callback:(void(^)(NSError * _Nonnull error, A0Token * _Nonnull token))callback;
 
 ///----------------------------------------
 /// @name User Profile
@@ -511,6 +528,26 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)fetchUserProfileWithAccessToken:(NSString *)accessToken
                                 success:(A0APIClientUserProfileSuccess)success
                                 failure:(A0APIClientError)failure DEPRECATED_ATTRIBUTE;
+
+
+/**
+ *  Change the password for a user.
+ *  By default it will use the first database connection name found in `application` property. If it's nil a *connection_name* must be set in parameters.
+ *
+ *  @param newPassword new password for the user
+ *  @param username    username to change its password. It can be an email or a username
+ *  @param parameters  optional parameters for Auth0 API. It can be nil
+ *  @param success     block called on success
+ *  @param failure     block called on failure with the reason as a parameter
+ *
+ *  @return an instance of `NSURLSessionDataTask`
+ *  @deprecated 1.22.1
+ */
+- (NSURLSessionDataTask *)changePassword:(NSString *)newPassword
+                             forUsername:(NSString *)username
+                              parameters:(nullable A0AuthParameters *)parameters
+                                 success:(void(^)())success
+                                 failure:(A0APIClientError)failure DEPRECATED_ATTRIBUTE;
 
 @end
 

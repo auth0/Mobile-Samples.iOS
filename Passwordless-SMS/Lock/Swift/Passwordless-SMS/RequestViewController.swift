@@ -41,10 +41,10 @@ class RequestViewController: UIViewController {
         self.emailLabel.text = app.profile?.nickname
         self.tokenLabel.text = app.token?.idToken
 
-        let session = NSURLSession.sharedSession()
+        let session = URLSession.shared
         if let pictureURL = app.profile?.picture {
-            let task = session.dataTaskWithURL(pictureURL, completionHandler: { [weak self] (data, _, error) -> Void in
-                dispatch_async(dispatch_get_main_queue()) {
+            let task = session.dataTask(with: pictureURL, completionHandler: { [weak self] (data, _, error) -> Void in
+                DispatchQueue.main.async {
                     if let imageData = data {
                         self?.profileImageView.image = UIImage(data: imageData)
                     }
@@ -60,52 +60,52 @@ class RequestViewController: UIViewController {
         self.secureStatus.layer.cornerRadius = self.secureStatus.frame.size.height / 2
         self.secureStatus.layer.masksToBounds = true
         self.nonSecureActivity.startAnimating()
-        self.performRequest(NSURLRequest(URL: app.nonSecurePingURL)) { [weak self] success in
+        self.performRequest(URLRequest(url: app.nonSecurePingURL)) { [weak self] success in
             self?.nonSecureStatus.text = success ? "✔︎" : "✖︎"
-            self?.nonSecureStatus.backgroundColor = success ? UIColor.greenColor() : UIColor.redColor()
+            self?.nonSecureStatus.backgroundColor = success ? UIColor.green : UIColor.red
             self?.message.text = success ? nil : "Failed request to non secured API.\n Please check app's log"
             self?.nonSecureActivity.stopAnimating()
         }
     }
 
-    @IBAction func logout(sender: AnyObject) {
+    @IBAction func logout(_ sender: AnyObject) {
         let app = Application.sharedInstance
         app.token = nil
         app.profile = nil
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
 
-    @IBAction func callAPI(sender: AnyObject) {
+    @IBAction func callAPI(_ sender: AnyObject) {
         let app = Application.sharedInstance
-        let request = NSMutableURLRequest(URL: app.securePingURL)
+        var request = URLRequest(url: app.securePingURL)
         let token = app.token!.idToken
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         self.secureActivity.startAnimating()
-        self.secureActivity.hidden = false
+        self.secureActivity.isHidden = false
         self.performRequest(request) { [weak self] success in
             self?.secureStatus.text = success ? "✔︎" : "✖︎"
-            self?.secureStatus.backgroundColor = success ? UIColor.greenColor() : UIColor.redColor()
+            self?.secureStatus.backgroundColor = success ? UIColor.green : UIColor.red
             self?.message.text = success ? nil : "Failed request to secured API.\n Please check app's log"
             self?.secureActivity.stopAnimating()
         }
     }
 
-    private func performRequest(request: NSURLRequest, callback: Bool -> ()) {
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) { (data, response, error) in
-            switch(data, response as? NSHTTPURLResponse, error) {
-            case (_, _, let .Some(error)):
+    fileprivate func performRequest(_ request: URLRequest, callback: @escaping (Bool) -> ()) {
+        let session = URLSession.shared
+        let task = session.dataTask(with: request, completionHandler: { (data, response, error) in
+            switch(data, response as? HTTPURLResponse, error) {
+            case (_, _, let .some(error)):
                 print("Failed request with error \(error)")
-                dispatch_async(dispatch_get_main_queue(), { callback(false) })
-            case (let .Some(data), let .Some(response), nil):
-                let result = String(data: data, encoding: NSUTF8StringEncoding)
+                DispatchQueue.main.async(execute: { callback(false) })
+            case (let .some(data), let .some(response), nil):
+                let result = String(data: data, encoding: String.Encoding.utf8)
                 print("Received response \(result) with status code \(response.statusCode)")
-                dispatch_async(dispatch_get_main_queue()) { callback(200..<300 ~= response.statusCode) }
+                DispatchQueue.main.async { callback(200..<300 ~= response.statusCode) }
             default:
                 print("Failed request with unkown error")
-                dispatch_async(dispatch_get_main_queue(), { callback(false) })
+                DispatchQueue.main.async(execute: { callback(false) })
             }
-        }
+        }) 
         task.resume()
     }
 }

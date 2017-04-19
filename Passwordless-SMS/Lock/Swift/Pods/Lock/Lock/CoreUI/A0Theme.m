@@ -54,6 +54,15 @@ NSString * const A0ThemeCredentialBoxBorderColor = @"A0ThemeCredentialBoxBorderC
 NSString * const A0ThemeCredentialBoxSeparatorColor = @"A0ThemeCredentialBoxSeparatorColor";
 NSString * const A0ThemeCredentialBoxBackgroundColor = @"A0ThemeCredentialBoxBackgroundColor";
 NSString * const A0ThemeCloseButtonTintColor = @"A0ThemeCloseButtonTintColor";
+NSString * const A0ThemeCloseButtonImageName = @"A0ThemeCloseButtonImageName";
+NSString * const A0ThemeIconEmail = @"A0ThemeIconEmail";
+NSString * const A0ThemeIconUsername = @"A0ThemeIconUsername";
+NSString * const A0ThemeIconLock = @"A0ThemeIconLock";
+NSString * const A0ThemeIconPhone = @"A0ThemeIconPhone";
+NSString * const A0ThemeTouchIDLockButtonImageNormalName = @"A0ThemeTouchIDLockButtonImageNormalName";
+NSString * const A0ThemeTouchIDLockButtonImageHighlightedName = @"A0ThemeTouchIDLockButtonImageHighlightedName";
+NSString * const A0ThemeTouchIDLockContainerBackgroundColor = @"A0ThemeTouchIDLockContainerBackgroundColor";
+
 
 #define kSecondaryButtonImageInsets UIEdgeInsetsMake(0, 28, 0, 28)
 
@@ -106,6 +115,11 @@ NSString * const A0ThemeCloseButtonTintColor = @"A0ThemeCloseButtonTintColor";
                      A0ThemeTextFieldTextColor: [UIColor colorWithWhite:0.302 alpha:1.000],
                      A0ThemeTextFieldIconColor: [UIColor colorWithWhite:0.600 alpha:1.000],
 
+                     A0ThemeIconEmail: [A0ImageTheme newImageWithName:@"Auth0.bundle/mail" bundle:nil],
+                     A0ThemeIconUsername: [A0ImageTheme newImageWithName:@"Auth0.bundle/person" bundle:nil],
+                     A0ThemeIconLock: [A0ImageTheme newImageWithName:@"Auth0.bundle/lock" bundle:nil],
+                     A0ThemeIconPhone: [A0ImageTheme newImageWithName:@"Auth0.bundle/cellphone" bundle:nil],
+
                      A0ThemeDescriptionFont: [UIFont systemFontOfSize:13.0f],
                      A0ThemeDescriptionTextColor: [UIColor colorWithWhite:0.302 alpha:1.000],
 
@@ -124,6 +138,11 @@ NSString * const A0ThemeCloseButtonTintColor = @"A0ThemeCloseButtonTintColor";
                      A0ThemeCredentialBoxBackgroundColor: [UIColor clearColor],
 
                      A0ThemeCloseButtonTintColor: [UIColor colorWithWhite:0.302 alpha:1.000],
+                     A0ThemeCloseButtonImageName: [A0ImageTheme newImageWithName:@"Auth0.bundle/close" bundle:nil],
+
+                     A0ThemeTouchIDLockButtonImageNormalName: [A0ImageTheme newImageWithName:@"Auth0.bundle/touchid" bundle:nil],
+                     A0ThemeTouchIDLockButtonImageHighlightedName: [A0ImageTheme newImageWithName:@"Auth0.bundle/touchid_selected" bundle:nil],
+                     A0ThemeTouchIDLockContainerBackgroundColor: [UIColor clearColor],
                      } mutableCopy];
         _customThemeForConnection = ^(NSString *n, A0ServiceTheme *t) { return t; };
     }
@@ -231,6 +250,22 @@ NSString * const A0ThemeCloseButtonTintColor = @"A0ThemeCloseButtonTintColor";
 - (void)configureLabel:(UILabel *)label {
     label.font = [self fontForKey:A0ThemeDescriptionFont];
     label.textColor = [self colorForKey:A0ThemeDescriptionTextColor];
+}
+
+- (void)configureMultilineLabel:(UILabel *)label withText:(NSString *)text {
+    label.preferredMaxLayoutWidth = 225;
+    label.numberOfLines = 3;
+    label.textAlignment = NSTextAlignmentCenter;
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+    style.lineSpacing = 5;
+    style.alignment = NSTextAlignmentCenter;
+    NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:text
+                                                               attributes:@{
+                                                                            NSFontAttributeName: [self fontForKey:A0ThemeDescriptionFont],
+                                                                            NSForegroundColorAttributeName: [self colorForKey:A0ThemeDescriptionTextColor],
+                                                                            NSParagraphStyleAttributeName: style,
+                                                                            }];
+    label.attributedText = attributedText;
 }
 
 - (A0ServiceTheme *)themeForStrategyName:(NSString *)strategyName andConnectionName:(NSString *)connectionName {
@@ -412,6 +447,7 @@ NSString * const A0ThemeCloseButtonTintColor = @"A0ThemeCloseButtonTintColor";
     }
     if ([strategyName isEqualToString:@"vkontakte"]) {
         values = @{
+                   A0ServiceThemeLocalizedTitle: A0LocalizedString(@"Login with VKONTAKTE"),
                    A0ServiceThemeNormalBackgroundColor: [UIColor colorWithRed:0.318 green:0.404 blue:0.553 alpha:1.000],
                    A0ServiceThemeHighlightedBackgroundColor: [UIColor colorWithRed:0.231 green:0.290 blue:0.392 alpha:1.000],
                    };

@@ -27,16 +27,17 @@
 #import "A0Lock.h"
 #import "A0AuthParameters.h"
 #import "NSObject+A0APIClientProvider.h"
+#import "Constants.h"
+#import "A0FailureAuthenticator.h"
 
-#if __has_include(<Lock/A0WebViewAuthenticator.h>)
+#if TARGET_OS_IOS && __has_include(<Lock/A0WebViewAuthenticator.h>)
 #define HAS_WEBVIEW_SUPPORT 1
 #import <Lock/A0WebViewAuthenticator.h>
 #endif
-#import "Constants.h"
 
 @interface A0IdentityProviderAuthenticator ()
 
-@property (weak, nonatomic) id<A0APIClientProvider> clientProvider;
+@property (weak, nonatomic) A0Lock *lock;
 @property (strong, nonatomic) NSMutableDictionary *authenticators;
 @property (assign, nonatomic) BOOL useWebAsDefault;
 
@@ -44,17 +45,11 @@
 
 @implementation A0IdentityProviderAuthenticator
 
-AUTH0_DYNAMIC_LOGGER_METHODS
-
 - (instancetype)initWithLock:(A0Lock *)lock {
-    return [self initWithClientProvider:lock];
-}
-
-- (id)initWithClientProvider:(id<A0APIClientProvider>)clientProvider {
     self = [super init];
     if (self) {
         _authenticators = [@{} mutableCopy];
-        _clientProvider = clientProvider;
+        _lock = lock;
         _useWebAsDefault = NO;
     }
     return self;
@@ -69,7 +64,7 @@ AUTH0_DYNAMIC_LOGGER_METHODS
 - (void)registerAuthenticationProvider:(A0BaseAuthenticator *)authenticationProvider {
     NSAssert(authenticationProvider != nil, @"Must supply a non-nil profile");
     NSAssert(authenticationProvider.identifier != nil, @"Provider must have a valid indentifier");
-    authenticationProvider.clientProvider = self.clientProvider;
+    authenticationProvider.clientProvider = self.lock;
     self.authenticators[authenticationProvider.identifier] = authenticationProvider;
 }
 
@@ -77,24 +72,9 @@ AUTH0_DYNAMIC_LOGGER_METHODS
                             parameters:(nullable A0AuthParameters *)parameters
                                success:(A0IdPAuthenticationBlock __nonnull)success
                                failure:(A0IdPAuthenticationErrorBlock __nonnull)failure {
-    id<A0AuthenticationProvider> idp = self.authenticators[connectionName];
-    //TODO: Once all IdP authenticators are changed remove this parameter dance.
     A0AuthParameters *params = [parameters copy];
-    params[A0ParameterConnection] = connectionName;
-    if (idp) {
-        [idp authenticateWithParameters:params success:success failure:failure];
-    } else {
-#ifdef HAS_WEBVIEW_SUPPORT
-        A0LogDebug(@"Authenticating %@ with WebView authenticator", connectionName);
-        A0WebViewAuthenticator *authenticator = [[A0WebViewAuthenticator alloc] initWithConnectionName:connectionName client:[self a0_apiClientFromProvider:self.clientProvider]];
-        [authenticator authenticateWithParameters:parameters success:success failure:failure];
-#else
-        A0LogWarn(@"No known provider for connection %@", connectionName);
-        if (failure) {
-            failure([A0Errors unkownProviderForConnectionName:connectionName]);
-        }
-#endif
-    }
+    id<A0AuthenticationProvider> idp = [self providerForConnectionName:connectionName];
+    [idp authenticateWithParameters:params success:success failure:failure];
 }
 
 - (BOOL)handleURL:(NSURL *)url sourceApplication:(NSString *)application {
@@ -113,6 +93,7 @@ AUTH0_DYNAMIC_LOGGER_METHODS
         [authenticator clearSessions];
     }];
 
+    [[self defaultProviderForConnectionName:@"auth0"] clearSessions];
 }
 
 - (void)applicationLaunchedWithOptions:(NSDictionary *)launchOptions {
@@ -121,12 +102,29 @@ AUTH0_DYNAMIC_LOGGER_METHODS
     }];
 }
 
+- (id<A0AuthenticationProvider>)defaultProviderForConnectionName:(NSString *)connectionName {
+#ifdef HAS_WEBVIEW_SUPPORT
+    return [[A0WebViewAuthenticator alloc] initWithConnectionName:connectionName lock:self.lock];
+#else
+    return [[A0FailureAuthenticator alloc] initWithConnectionName:connectionName];
+#endif
+}
+
+- (id<A0AuthenticationProvider>)providerForConnectionName:(NSString *)connectionName {
+    id<A0AuthenticationProvider> provider = self.authenticators[connectionName];
+    if (!provider) {
+        provider = [self defaultProviderForConnectionName:connectionName];
+    }
+    A0LogDebug(@"Provider %@ for connection %@", NSStringFromClass([provider class]), connectionName);
+    return provider;
+}
+
 @end
 
 @implementation A0IdentityProviderAuthenticator (Deprecated)
 
 - (id)init {
-    return [self initWithClientProvider:nil];
+    return [self initWithLock:[A0Lock sharedLock]];
 }
 
 + (A0IdentityProviderAuthenticator *)sharedInstance {
@@ -138,9 +136,7 @@ AUTH0_DYNAMIC_LOGGER_METHODS
     return instance;
 }
 
-- (void)configureForApplication:(A0Application *)application {
-    //NOOP
-}
+- (void)configureForApplication:(A0Application *)application {}
 
 - (void)authenticateForStrategyName:(NSString *)strategyName
                          parameters:(A0AuthParameters *)parameters
