@@ -1,5 +1,0 @@
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/CocoaLumberjack" "${PODS_ROOT}/Headers/Public/Lock" "${PODS_ROOT}/Headers/Public/SimpleKeychain" "${PODS_ROOT}/Headers/Public/TouchIDAuth"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/AFNetworking" -isystem "${PODS_ROOT}/Headers/Public/CocoaLumberjack" -isystem "${PODS_ROOT}/Headers/Public/Lock" -isystem "${PODS_ROOT}/Headers/Public/SimpleKeychain" -isystem "${PODS_ROOT}/Headers/Public/TouchIDAuth"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"AFNetworking" -l"CocoaLumberjack" -l"Lock" -l"SimpleKeychain" -l"TouchIDAuth" -framework "CoreGraphics" -framework "LocalAuthentication" -framework "MobileCoreServices" -framework "Security" -framework "SystemConfiguration"
-PODS_ROOT = ${SRCROOT}/Pods
